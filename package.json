@@ -1,0 +1,25 @@
+{
+  "name": "scene-preset",
+  "version": "1.0.0",
+  "description": "Abstracts boilerplate when making 3D scenes with Three.js",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisArmando-TestCoder/scene-preset.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuisArmando-TestCoder/scene-preset/issues"
+  },
+  "homepage": "https://github.com/LuisArmando-TestCoder/scene-preset#readme",
+  "dependencies": {
+    "@types/dom-mediacapture-record": "^1.0.7",
+    "body-scroll-lock": "^3.1.5",
+    "three": "^0.124.0"
+  }
+}
