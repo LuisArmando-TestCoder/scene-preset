@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 
-import { ShaderMaterial } from 'three'
 import { materials, animations, customUniforms } from '../state'
 import { CustomUniform } from '../types/state'
 
@@ -97,7 +96,7 @@ function setIMouseWatchers() {
         })
 }
 
-export default function setUniforms(material: THREE.Material, customUniform: CustomUniform = {}) {
+export default function setUniforms(material: THREE.ShaderMaterial, customUniform: CustomUniform = {}) {
     if (!animations.includes(setUniformsWatcher)) {
         animations.push(setUniformsWatcher)
         setIMouseWatchers()
@@ -113,5 +112,5 @@ export default function setUniforms(material: THREE.Material, customUniform: Cus
     overrideCustomUniforms(customUniform, materialIndex)
 
     // first assignment of the uniforms without animations
-    assignUniforms(material as ShaderMaterial, materialIndex)
+    assignUniforms(material, materialIndex)
 }
