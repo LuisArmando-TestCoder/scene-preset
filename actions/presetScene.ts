@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 import { addDefaultObjects } from '../utils'
-import { setFilteredControls } from '../actions'
+import { startControls } from '../actions'
 import { getCanvasState } from '../consulters'
 import {
     CanvasState,
@@ -161,7 +161,7 @@ export default function presetScene(presetSceneCallbacks: PresetSceneCallbacks, 
         sceneSetup.setSceneCallbacks(presetSceneCallbacks)
 
         addDefaultObjects(canvasState)
-        setFilteredControls(canvasState)
+        startControls(canvasState)
         handleCanvasSize(canvasState)
         initializeGlobalAnimations(canvasState)
 

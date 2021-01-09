@@ -94,10 +94,17 @@ export const mouseController = new MouseController()
 export default function setFirstPersonDirection(canvasState: CanvasState) {
     mouseController.camera = canvasState.camera
 
-    canvasState.canvas.addEventListener('mousemove', setCameraSight)
-    canvasState.canvas.addEventListener('mouseup', setControlOnMouseUp)
+    const { controlsBlacklist } = canvasState.presetConfiguration
+    const getIsPassingBlacklist = () => !controlsBlacklist.includes('setFirstPersonDirection')
+
+    canvasState.canvas.addEventListener('mousemove', (event: MouseEvent) => {
+        getIsPassingBlacklist() && setCameraSight(event)
+    })
+    canvasState.canvas.addEventListener('mouseup', (event: MouseEvent) => {
+        getIsPassingBlacklist() && setControlOnMouseUp(event)
+    })
     canvasState.canvas.addEventListener('mousedown', (event: MouseEvent) => {
-        setControlOnMouseDown(event, canvasState)
+        getIsPassingBlacklist() && setControlOnMouseDown(event, canvasState)
     })
 
     fakeCameraSetting()

@@ -289,6 +289,13 @@ export default function setFirstPersonPosition(canvasState: CanvasState) {
 
     controls.forEach(onKey)
 
-    canvasState.canvas.addEventListener('keydown', setControlOnKeyDown)
-    canvasState.canvas.addEventListener('keyup', setControlOnKeyUp)
+    const { controlsBlacklist } = canvasState.presetConfiguration
+    const getIsPassingBlacklist = () => !controlsBlacklist.includes('setFirstPersonPosition')
+
+    canvasState.canvas.addEventListener('keydown', (event: KeyboardEvent) => {
+        getIsPassingBlacklist() && setControlOnKeyDown(event)
+    })
+    canvasState.canvas.addEventListener('keyup', (event: KeyboardEvent) => {
+        getIsPassingBlacklist() && setControlOnKeyUp(event)
+    })
 }
