@@ -5,7 +5,7 @@ import {
     Triggerer,
 } from '../utils'
 
-export {
+export type {
     AudioProperties,
     KeyLifeCycle,
     KeyHandler,

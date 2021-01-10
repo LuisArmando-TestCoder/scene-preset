@@ -29,7 +29,7 @@ import {
     SceneSetupIntrudes
 } from '../state/sceneSetupIntrudes'
 
-export {
+export type {
     AnimationsState,
     AudiosState,
     CanvasStateCallback,

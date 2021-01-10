@@ -3,12 +3,12 @@ import animations from '../state/animations'
 import keysState from '../state/keys'
 import {
     KeyLifeCycleObject,
-} from '../types/state'
+} from '../state/keys'
 import {
     KeyHandler,
     KeyLifeCycle,
     Triggerer,
-} from '../types/utils'
+} from '../utils'
 
 function handleKeyboardActions() {
     if (!keysState.keys) {

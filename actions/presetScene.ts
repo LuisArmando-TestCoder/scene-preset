@@ -4,7 +4,6 @@ import { addDefaultObjects } from '../utils'
 import { startControls } from '../actions'
 import { getCanvasState } from '../consulters'
 import {
-    CanvasState,
     PresetSceneCallbacks,
     CanvasStateCallback,
 } from '../types/state'
@@ -14,6 +13,9 @@ import {
     animationsState,
     sceneSetupIntrudes,
 } from '../state'
+import {
+    CanvasState,
+} from '../state/canvases'
 
 function intrudeSceneSetup(canvasState: CanvasState) {
     Object.keys(sceneSetupIntrudes).forEach(canvasSelector => {

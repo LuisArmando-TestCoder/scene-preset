@@ -4,7 +4,7 @@ import {
     SimpleCube,
 } from '../components'
 
-export {
+export type {
     SimpleLightSet,
     SimpleFloor,
     SimpleCube,
