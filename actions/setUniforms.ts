@@ -75,7 +75,7 @@ function assignUniformValue(
         return
     }
 
-    material.uniforms[uniformName].value = value  
+    material.uniforms[uniformName].value = value
 }
 
 function overrideCustomUniforms(customUniform: CustomUniform, materialIndex: number) {
@@ -87,13 +87,13 @@ function overrideCustomUniforms(customUniform: CustomUniform, materialIndex: num
 }
 
 function setIMouseWatchers() {
-        window.addEventListener('mousemove', (event: MouseEvent) => {
-            iMouse.set(event.clientX, event.clientY, iMouse.z, iMouse.w)
-        })
-        
-        window.addEventListener('click', (event: MouseEvent) => {
-            iMouse.set(iMouse.x, iMouse.y, event.clientX, event.clientY)    
-        })
+    window.addEventListener('mousemove', (event: MouseEvent) => {
+        iMouse.set(event.clientX, event.clientY, iMouse.z, iMouse.w)
+    })
+
+    window.addEventListener('click', (event: MouseEvent) => {
+        iMouse.set(iMouse.x, iMouse.y, event.clientX, event.clientY)
+    })
 }
 
 export default function setUniforms(material: THREE.ShaderMaterial, customUniform: CustomUniform = {}) {
@@ -101,7 +101,7 @@ export default function setUniforms(material: THREE.ShaderMaterial, customUnifor
         animations.push(setUniformsWatcher)
         setIMouseWatchers()
     }
-    
+
     if (!materials.includes(material)) {
         materials.push(material)
         customUniforms.push(customUniform)
