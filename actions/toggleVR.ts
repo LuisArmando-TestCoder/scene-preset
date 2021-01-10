@@ -9,5 +9,5 @@ export default function toggleVR(canvasSelector: string = 'canvas') {
         canvasState.VRToggler = VRButton.createButton(canvasState.renderer)
     }
 
-    canvasState.VRToggler.click()
+    setTimeout(() => canvasState.VRToggler.click())
 }
