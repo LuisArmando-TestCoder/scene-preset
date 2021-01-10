@@ -21,12 +21,12 @@ const material = new THREE.MeshStandardMaterial({ color: 0x990000 })
 const mesh = new THREE.Mesh(geometry, material)
 
 presetScene({ 
-  setup({ scene }) {
-		scene.add(mesh)
-  },
-  animate({ scene }) {
-		mesh.rotation.y += .01
-  },
+    setup({ scene }) {
+	    scene.add(mesh)
+    },
+    animate({ scene }) {
+	    mesh.rotation.y += .01
+    },
 })
 ```
 
@@ -52,9 +52,9 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-  setup({ scene }) {
+    setup({ scene }) {
 		actions.blacklistObjects({ scene, blacklist: ['SimpleCube'] })
-  },
+    },
 })
 ```
 
@@ -68,14 +68,14 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-  setup({ scene }) {
+    setup({ scene }) {
 		// to be specific of from which children group to start the blacklisting
 		const objects = simpleCubesGroups[0].children
 		// objects is just an array
 		// ... so an specific singular parent could be called like [parent]
 
 		actions.blacklistObjects({ scene, objects, blacklist: ['SimpleCube'] })
-  },
+    },
 })
 ```
 
@@ -89,9 +89,9 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-  setup({ scene }) {
+    setup({ scene }) {
 		actions.whitelistObjects({ scene, whitelist: ['SimpleCube'] })
-  },
+    },
 })
 ```
 
@@ -105,14 +105,14 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-  setup({ scene }) {
+    setup({ scene }) {
 		// to be specific of from which children group to start the blacklisting
 		const objects = simpleCubesGroups[0].children
 		// objects is just an array
 		// ... so an specific singular parent could be called like [parent]
 
 		actions.whitelistObjects({ scene, objects, whitelist: ['SimpleCube'] })
-  },
+    },
 })
 ```
 
@@ -124,10 +124,10 @@ presetScene({
 import presetScene, { actions, types } from 'scene-preset'
 
 presetScene({ 
-  setup() {
-		// blacklistControls needs to be used after CanvasState is initialized
-		actions.blacklistControls(['setFirstPersonPosition'])
-  },
+    setup() {
+	    // blacklistControls needs to be used after CanvasState is initialized
+	    actions.blacklistControls(['setFirstPersonPosition'])
+    },
 })
 ```
 
@@ -141,9 +141,9 @@ import presetScene, { actions, types } from 'scene-preset'
 const canvasSelector = '#MySpecificCanvasId'
 
 presetScene({ 
-  setup() {
-		actions.blacklistControls(['setFirstPersonZoom'], canvasSelector)
-  },
+    setup() {
+	    actions.blacklistControls(['setFirstPersonZoom'], canvasSelector)
+    },
 }, canvasSelector)
 ```
 
@@ -183,11 +183,11 @@ import { vertexShader } from '../Shaders/MisticalColors'
 const material = new THREE.ShaderMaterial({ vertexShader })
 
 presetScene({ 
-  setup({ camera }) {
+    setup({ camera }) {
 		actions.setUniforms(material, {
-			iCameraPosition: () => camera.position
-		})
-	}
+		    iCameraPosition: () => camera.position
+        })
+    }
 })
 ```
 
@@ -221,7 +221,7 @@ uniform vec4      iMouse;
 // uniform float     iSampleRate;
 
 void main() {
-  gl_FragColor = vec4(0., 1., 1., 1.);
+    gl_FragColor = vec4(0., 1., 1., 1.);
 }
 ```
 
@@ -273,7 +273,7 @@ presetScene({
 import presetScene, { actions, consulters } from 'scene-preset'
 
 presetScene({
-   setup({ scene, canvas, canvasSelector }) {
+   setup({ canvas }) {
 		const someStartTime = 2e3
 		const someDuration = 5e3
 		const endTime = someStartTime + someDuration
@@ -293,7 +293,7 @@ presetScene({
 
 		// Download canvas recording on stop
 		// this will be downloaded as a .webm
-    actions.downloadCanvasRecordingOnStop(recorder)
+        actions.downloadCanvasRecordingOnStop(recorder)
 	}
 })
 ```
@@ -317,7 +317,7 @@ AudioProperties contains the following properties:
 import presetScene, { consulters } from 'scene-preset'
 
 presetScene({
-  animate() {
+    animate() {
 		// audio as HTMLMediaElement
 		const audioProperties = consulters.getAudioProperties(audio)
 
