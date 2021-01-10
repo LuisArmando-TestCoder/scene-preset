@@ -16,7 +16,7 @@ import {
 } from '../actions/setFirstPersonPosition'
 
 
-export {
+export type {
     MouseController,
     KeyController,
     CameraProperties,

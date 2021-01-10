@@ -2,7 +2,6 @@ import {
     AnimationsState,
 } from '../state/animations'
 import {
-    AudioProperties,
     AudiosState,
 } from '../state/audios'
 import {
@@ -32,7 +31,6 @@ import {
 
 export {
     AnimationsState,
-    AudioProperties,
     AudiosState,
     CanvasStateCallback,
     PresetConfiguration,
