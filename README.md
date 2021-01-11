@@ -106,7 +106,7 @@ import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
     	setup({ scene }) {
-		// to be specific of from which children group to start the blacklisting
+		// to be specific of from which children group to start the whitelisting
 		const objects = simpleCubesGroups[0].children
 		// objects is just an array
 		// ... so an specific singular parent could be called like [parent]
