@@ -11,6 +11,16 @@ export default class KeyHandler {
         this.triggerer = triggerer
     }
 
+    visibilitychange(event: Event) {
+        if (document.hidden) {
+            for (const key of keysState.queue) {
+                this.triggerer.triggerQueue('end', key)
+            }
+    
+            keysState.queue.splice(0)
+        }
+    }
+
     keydown(key: string) {
         // adding key to queue
         if (!keysState.queue.includes(key)) {
@@ -38,7 +48,9 @@ export default class KeyHandler {
                     keysState.events[key] = event
                     this[keyEventName](key)
                 }
-            ) 
+            )
+
+            window.addEventListener('visibilitychange', this.visibilitychange.bind(this)) 
         })
     }
 }

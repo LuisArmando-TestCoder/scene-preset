@@ -209,11 +209,11 @@ function triggerFlyCode() {
     }
 }
 
-function deleteFliyingKeyFromQueue(event: KeyboardEvent) {
-    const isKeyAlreadyInQueue = keyController.flyingKeys.includes(event.code)
+function deleteFliyingKeyFromQueue(code: string) {
+    const isKeyAlreadyInQueue = keyController.flyingKeys.includes(code)
 
     if (isKeyAlreadyInQueue) {
-        keyController.flyingKeys.splice(keyController.flyingKeys.indexOf(event.code), 1)
+        keyController.flyingKeys.splice(keyController.flyingKeys.indexOf(code), 1)
     }
 }
 
@@ -274,12 +274,21 @@ function setControlOnKeyDown(event: KeyboardEvent) {
     addFlyingKeyToQueue(event)
 }
 
-function setControlOnKeyUp(event: KeyboardEvent) {
-    const key = event.key.toLowerCase();
-    deleteKeyFromQueue(key)
+function setControlOnKeyUp(key: string, code: string) {
+    deleteKeyFromQueue(key.toLowerCase())
     chooseKey()
 
-    deleteFliyingKeyFromQueue(event)
+    deleteFliyingKeyFromQueue(code)
+}
+
+function resetLocalQueues() {
+    for (const keyAxis in keyController.keyAxes) {
+        const keyAxisQueue = keyController.keyAxes[keyAxis]
+
+        keyAxisQueue.splice(0)
+    }
+
+    keyController.flyingKeys.splice(0)
 }
 
 export default function setFirstPersonPosition(canvasState: CanvasState) {
@@ -296,6 +305,12 @@ export default function setFirstPersonPosition(canvasState: CanvasState) {
         getIsPassingBlacklist() && setControlOnKeyDown(event)
     })
     window.addEventListener('keyup', (event: KeyboardEvent) => {
-        getIsPassingBlacklist() && setControlOnKeyUp(event)
+        getIsPassingBlacklist() && setControlOnKeyUp(event.key, event.code)
     })
+    document.addEventListener('visibilitychange', (event: Event) => {
+        if (document.hidden) {
+            // the behavior of animation frame stops execution hurts visibility change execution?
+            resetLocalQueues()
+        }
+    });
 }
