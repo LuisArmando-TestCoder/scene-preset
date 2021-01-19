@@ -308,9 +308,6 @@ export default function setFirstPersonPosition(canvasState: CanvasState) {
         getIsPassingBlacklist() && setControlOnKeyUp(event.key, event.code)
     })
     document.addEventListener('visibilitychange', (event: Event) => {
-        if (document.hidden) {
-            // the behavior of animation frame stops execution hurts visibility change execution?
-            resetLocalQueues()
-        }
+        if (document.hidden) resetLocalQueues()
     });
 }
