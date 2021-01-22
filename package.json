@@ -1,6 +1,6 @@
 {
   "name": "scene-preset",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Abstracts boilerplate when making 3D scenes with Three.js",
   "main": "index.ts",
   "scripts": {
