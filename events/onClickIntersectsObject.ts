@@ -31,7 +31,7 @@ export default function onClickIntersectsObject(
     callback: Function,
     canvasSelector = 'canvas'
 ) {
-    if (!getCanvasState(canvasSelector)) {
+    if (!getCanvasState(canvasSelector)?.intersectionUtils) {
         const canvas: HTMLCanvasElement = document.querySelector(canvasSelector)
         const raycaster = new THREE.Raycaster()
 
