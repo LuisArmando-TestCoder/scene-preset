@@ -49,9 +49,19 @@ function handleCanvasSize(canvasState: CanvasState) {
 
     setCanvasToElementSize(canvasState, parent)
 
-    new window['ResizeObserver'](() => {
+    const ResizeObserver = window['ResizeObserver']
+
+    if (ResizeObserver) {
+        new ResizeObserver(() => {
+            setCanvasToElementSize(canvasState, parent)
+        }).observe(parent)
+
+        return
+    }
+
+    window.addEventListener('resize', () => {
         setCanvasToElementSize(canvasState, parent)
-    }).observe(parent)
+    })
 }
 
 function setCanvasToElementSize(canvasState: CanvasState, element: HTMLElement) {
