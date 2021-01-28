@@ -73,10 +73,10 @@ function setCanvasToElementSize(canvasState: CanvasState, element: HTMLElement) 
 
     canvas.width = element.clientWidth
     canvas.height = element.clientHeight
-    camera['aspect'] = window.innerWidth / window.innerHeight
+    camera['aspect'] = canvas.width / canvas.height
 
     camera['updateProjectionMatrix']()
-    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setSize(canvas.width, canvas.height)
 }
 
 class SceneSetup {
