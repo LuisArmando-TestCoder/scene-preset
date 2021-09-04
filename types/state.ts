@@ -5,7 +5,10 @@ import {
     AudiosState,
 } from '../state/audios'
 import {
+    KeyController,
+    CameraVectorsState,
     CanvasStateCallback,
+    ControlsBlacklist,
     PresetConfiguration,
     PresetSceneCallbacks,
     IntersectionUtils,
@@ -30,9 +33,12 @@ import {
 } from '../state/sceneSetupIntrudes'
 
 export type {
+    KeyController,
+    CameraVectorsState,
     AnimationsState,
     AudiosState,
     CanvasStateCallback,
+    ControlsBlacklist,
     PresetConfiguration,
     PresetSceneCallbacks,
     IntersectionUtils,

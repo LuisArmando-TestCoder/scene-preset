@@ -1,6 +1,7 @@
 import { keysState, animations } from '../state'
 
-const getKeysLength = () => keysState.keys ? Object.keys(keysState.keys).length : 0
+const getKeysLength = () => keysState.keys ?
+    Object.keys(keysState.keys).length : 0
 
 let keysAmount = getKeysLength()
 

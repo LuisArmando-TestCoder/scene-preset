@@ -88,6 +88,10 @@ class SceneSetup {
 
     setCamera() {
         this.canvasState.camera.lookAt(new THREE.Vector3())
+
+        this.canvasState.camera.position.y =
+            this.canvasState.presetConfiguration
+                .camera.cameraVectorsState.position.y
     }
 
     setRenderer() {

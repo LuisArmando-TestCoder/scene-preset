@@ -23,10 +23,10 @@ const mesh = new THREE.Mesh(geometry, material)
 presetScene({ 
 	setup({ scene }) {
 		scene.add(mesh)
-    	},
-    	animate({ scene }) {
-    		mesh.rotation.y += .01
-    	},
+	},
+	animate({ scene }) {
+		mesh.rotation.y += .01
+	},
 })
 ```
 
@@ -52,9 +52,9 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-    	setup({ scene }) {
+	setup({ scene }) {
 		actions.blacklistObjects({ scene, blacklist: ['SimpleCube'] })
-    	},
+    },
 })
 ```
 
@@ -68,14 +68,14 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-    	setup({ scene }) {
+	setup({ scene }) {
 		// to be specific of from which children group to start the blacklisting
 		const objects = simpleCubesGroups[0].children
 		// objects is just an array
 		// ... so an specific singular parent could be called like [parent]
 
 		actions.blacklistObjects({ scene, objects, blacklist: ['SimpleCube'] })
-    	},
+    },
 })
 ```
 
@@ -89,9 +89,9 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-    	setup({ scene }) {
+	setup({ scene }) {
 		actions.whitelistObjects({ scene, whitelist: ['SimpleCube'] })
-    	},
+    },
 })
 ```
 
@@ -105,14 +105,18 @@ List objects by the name in their mesh
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-    	setup({ scene }) {
+    setup({ scene }) {
 		// to be specific of from which children group to start the whitelisting
 		const objects = simpleCubesGroups[0].children
 		// objects is just an array
 		// ... so an specific singular parent could be called like [parent]
 
-		actions.whitelistObjects({ scene, objects, whitelist: ['SimpleCube'] })
-    	},
+		actions.whitelistObjects({
+			scene,
+			objects,
+			whitelist: ['SimpleCube']
+		})
+    },
 })
 ```
 
@@ -124,10 +128,10 @@ presetScene({
 import presetScene, { actions, types } from 'scene-preset'
 
 presetScene({ 
-    	setup() {
-    		// blacklistControls needs to be used after CanvasState is initialized
+	setup() {
+		// blacklistControls needs to be used after CanvasState is initialized
 		actions.blacklistControls(['setFirstPersonPosition'])
-    	},
+    },
 })
 ```
 
@@ -142,8 +146,8 @@ const canvasSelector = '#MySpecificCanvasId'
 
 presetScene({ 
 	setup() {
-    		actions.blacklistControls(['setFirstPersonZoom'], canvasSelector)
-    	},
+		actions.blacklistControls(['setFirstPersonZoom'], canvasSelector)
+    },
 }, canvasSelector)
 ```
 
@@ -185,9 +189,9 @@ const material = new THREE.ShaderMaterial({ vertexShader })
 presetScene({ 
 	setup({ camera }) {
 		actions.setUniforms(material, {
-			iCameraPosition: () => camera.position
-        	})
-    	}
+				iCameraPosition: () => camera.position
+    	})
+	}
 })
 ```
 
@@ -255,9 +259,9 @@ actions.toggleFullscreen(canvas.parentElement)
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({
-    	setup({ canvasSelector }) {
-    		actions.toggleVR(canvasSelector)
-    	}
+	setup({ canvasSelector }) {
+		actions.toggleVR(canvasSelector)
+	}
 })
 ```
 
@@ -293,7 +297,7 @@ presetScene({
 
 		// Download canvas recording on stop
 		// this will be downloaded as a .webm
-        	actions.downloadCanvasRecordingOnStop(recorder)
+        actions.downloadCanvasRecordingOnStop(recorder)
 	}
 })
 ```
@@ -317,11 +321,73 @@ AudioProperties contains the following properties:
 import presetScene, { consulters } from 'scene-preset'
 
 presetScene({
-    	animate() {
+    animate() {
 		// audio as HTMLMediaElement
 		const audioProperties = consulters.getAudioProperties(audio)
 
 		if (audioProperties) console.log(audioProperties)
 	}
 })
+```
+
+## Access camera vectors configuration
+
+### canvasState.presetConfiguration.camera.cameraVectorsState
+
+```jsx
+import presetScene, { consulters } from 'scene-preset'
+
+presetScene({
+	setup({ canvasSelector }) {
+		const canvasState = consulters.getCanvasState(canvasSelector)
+		
+		canvasState.presetConfiguration.camera
+			.cameraVectorsState.position.min.y = -Infinity
+
+		canvasState.presetConfiguration.camera
+			.cameraVectorsState.position.y = 2
+	},
+}, 'canvas')
+```
+
+The following types and interfaces are contained within
+the CameraVectorsState type
+
+```ts
+interface Position {
+	x: number
+	z: number
+	y: number
+	min: {
+		y: number
+	}
+}
+
+interface FlySpeed {
+	force: number
+	direction: number
+	friction: number
+	acceleration: number
+	max: {
+		acceleration: number
+	}
+}
+
+interface Acceleration {
+	x: number
+	z: number
+}
+
+interface Friction {
+	x: number
+	z: number
+}
+
+interface Top {
+	acceleration: Acceleration
+}
+
+type Rotation = number
+
+type ChosenAxis = 'x' | 'y' | 'z'
 ```

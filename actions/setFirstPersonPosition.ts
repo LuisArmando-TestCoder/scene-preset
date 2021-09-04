@@ -1,99 +1,54 @@
 import { mouseController } from './setFirstPersonDirection'
 import { CanvasState } from '../types/state'
 import { onKey } from '../events'
+import {
+    cameraVectorsState,
+    keyController,
+} from '../state/canvases'
 import animations from '../state/animations'
 
-export class KeyController {
-    keyAxes = {
-        ws: [],
-        ad: [],
-    }
-    chosenKey = ""
-    flyingKeys = []
-}
+const auxiliaryCameraDirection = { x: Math.PI, y: Math.PI }
 
-export const keyController = new KeyController()
-
-const auxiliarCameraDirection = { x: Math.PI, y: Math.PI }
-
-const friqtionResistance = 2
-
-export class CameraProperties {
-    position = {
-        x: 0,
-        z: 0,
-        y: 2,
-        min: {
-            y: 2
-        }
-    }
-    flySpeed = {
-        force: 0.005,
-        direction: 0,
-        friction: 0.0025,
-        acceleration: 0,
-        max: {
-            acceleration: 0.1
-        }
-    }
-    acceleration = {
-        x: 0,
-        z: 0,
-    }
-    friqtion = {
-        x: 0.005,
-        z: 0.005,
-    }
-    rotation = 0
-    chosenAxis = 'z'
-    top = {
-        acceleration: {
-            x: 0.05,
-            z: 0.05,
-        },
-    }
-}
-
-export const cameraProperties = new CameraProperties()
+const frictionResistance = 2
 
 const move = {
     right_forward() {
-        cameraProperties.rotation = deegresToRadians(-90)
-        cameraProperties.chosenAxis = 'z'
+        cameraVectorsState.rotation = degreesToRadians(-90)
+        cameraVectorsState.chosenAxis = 'z'
     },
     left_forward() {
-        cameraProperties.rotation = deegresToRadians(90)
-        cameraProperties.chosenAxis = 'z'
+        cameraVectorsState.rotation = degreesToRadians(90)
+        cameraVectorsState.chosenAxis = 'z'
     },
     right_backward() {
-        cameraProperties.rotation = deegresToRadians(-270)
-        cameraProperties.chosenAxis = 'x'
+        cameraVectorsState.rotation = degreesToRadians(-270)
+        cameraVectorsState.chosenAxis = 'x'
     },
     left_backward() {
-        cameraProperties.rotation = deegresToRadians(270)
-        cameraProperties.chosenAxis = 'x'
+        cameraVectorsState.rotation = degreesToRadians(270)
+        cameraVectorsState.chosenAxis = 'x'
     },
     forward() {
-        cameraProperties.rotation = 0
-        cameraProperties.chosenAxis = 'z'
+        cameraVectorsState.rotation = 0
+        cameraVectorsState.chosenAxis = 'z'
     },
     backward() {
-        cameraProperties.rotation = deegresToRadians(360)
-        cameraProperties.chosenAxis = 'z'
+        cameraVectorsState.rotation = degreesToRadians(360)
+        cameraVectorsState.chosenAxis = 'z'
     },
     right() {
-        cameraProperties.rotation = deegresToRadians(-180)
-        cameraProperties.chosenAxis = 'x'
+        cameraVectorsState.rotation = degreesToRadians(-180)
+        cameraVectorsState.chosenAxis = 'x'
     },
     left() {
-        cameraProperties.rotation = deegresToRadians(180)
-        cameraProperties.chosenAxis = 'x'
+        cameraVectorsState.rotation = degreesToRadians(180)
+        cameraVectorsState.chosenAxis = 'x'
     },
     up() {
-        cameraProperties.flySpeed.direction = -1
+        cameraVectorsState.flySpeed.direction = -1
     },
     down() {
-        cameraProperties.flySpeed.direction = 1
+        cameraVectorsState.flySpeed.direction = 1
     },
 }
 
@@ -116,18 +71,18 @@ const movementKeys = {
 
 const validAxes = ['x', 'z']
 
-function deegresToRadians(degrees) {
+function degreesToRadians(degrees) {
     const normalizedDegrees = degrees / 360
     return normalizedDegrees * Math.PI
 }
 
 function reduceFirstPersonPositionAcceleration() {
     const key = 'acceleration'
-    const obj = cameraProperties
+    const obj = cameraVectorsState
     validAxes.forEach((axis) => {
-        const surpassingFriqtion = Math.abs(obj[key][axis]) > obj.friqtion[axis] / 2
-        if (surpassingFriqtion) {
-            obj[key][axis] += -Math.sign(obj[key][axis]) * (obj.friqtion[axis] / friqtionResistance)
+        const surpassingFriction = Math.abs(obj[key][axis]) > obj.friction[axis] / 2
+        if (surpassingFriction) {
+            obj[key][axis] += -Math.sign(obj[key][axis]) * (obj.friction[axis] / frictionResistance)
         } else {
             obj[key][axis] = 0
         }
@@ -136,11 +91,11 @@ function reduceFirstPersonPositionAcceleration() {
 
 function topFirstPersonPositionAcceleration() {
     validAxes.forEach((axis) => {
-        if (cameraProperties.acceleration[axis] > cameraProperties.top.acceleration[axis]) {
-            cameraProperties.acceleration[axis] = cameraProperties.top.acceleration[axis]
+        if (cameraVectorsState.acceleration[axis] > cameraVectorsState.top.acceleration[axis]) {
+            cameraVectorsState.acceleration[axis] = cameraVectorsState.top.acceleration[axis]
         }
-        if (cameraProperties.acceleration[axis] < -cameraProperties.top.acceleration[axis]) {
-            cameraProperties.acceleration[axis] = -cameraProperties.top.acceleration[axis]
+        if (cameraVectorsState.acceleration[axis] < -cameraVectorsState.top.acceleration[axis]) {
+            cameraVectorsState.acceleration[axis] = -cameraVectorsState.top.acceleration[axis]
         }
     })
 }
@@ -149,9 +104,9 @@ function setMoveOnKeyDown() {
     if (movementKeys[keyController.chosenKey]) {
         movementKeys[keyController.chosenKey]()
 
-        const { acceleration, friqtion, chosenAxis } = cameraProperties
+        const { acceleration, friction, chosenAxis } = cameraVectorsState
 
-        acceleration[chosenAxis] += friqtion[chosenAxis] * friqtionResistance
+        acceleration[chosenAxis] += friction[chosenAxis] * frictionResistance
     }
 }
 
@@ -195,10 +150,10 @@ function deleteKeyFromQueue(key: string) {
 function triggerFlyCode() {
     if (keyController.flyingKeys.length) {
         // fly force increase
-        cameraProperties.flySpeed.acceleration = Math.min(
-            cameraProperties.flySpeed.max.acceleration,
-            cameraProperties.flySpeed.acceleration
-          + cameraProperties.flySpeed.force
+        cameraVectorsState.flySpeed.acceleration = Math.min(
+            cameraVectorsState.flySpeed.max.acceleration,
+            cameraVectorsState.flySpeed.acceleration
+          + cameraVectorsState.flySpeed.force
         )
 
         flyingKeys[
@@ -209,7 +164,7 @@ function triggerFlyCode() {
     }
 }
 
-function deleteFliyingKeyFromQueue(code: string) {
+function deleteFlyingKeyFromQueue(code: string) {
     const isKeyAlreadyInQueue = keyController.flyingKeys.includes(code)
 
     if (isKeyAlreadyInQueue) {
@@ -238,29 +193,36 @@ function updateFirstPersonPosition(canvasState: CanvasState) {
     topFirstPersonPositionAcceleration()
     triggerFlyCode()
 
-
     const { cameraDirection } = mouseController
-    const direction = cameraDirection || auxiliarCameraDirection
+    const direction = cameraDirection || auxiliaryCameraDirection
 
     const { camera } = canvasState
-    const { acceleration, chosenAxis, rotation } = cameraProperties
+    const { acceleration, chosenAxis, rotation } = cameraVectorsState
     
     if (camera) {
         camera.position.x += acceleration[chosenAxis] * Math.sin(direction.x + rotation)
         camera.position.z += acceleration[chosenAxis] * Math.cos(direction.x + rotation)
-        
-        cameraProperties.flySpeed.acceleration = Math.max(
-            0,
-            cameraProperties.flySpeed.acceleration
-          - cameraProperties.flySpeed.friction
-        )
-        cameraProperties.position.y = Math.max(
-            cameraProperties.position.min.y,
-            cameraProperties.position.y
-          - cameraProperties.flySpeed.acceleration
-          * cameraProperties.flySpeed.direction
-        )
-        camera.position.y = cameraProperties.position.y
+
+        const { controlsBlacklist } = canvasState.presetConfiguration
+
+        if (!controlsBlacklist.includes('setFirstPersonFlying')) {
+            cameraVectorsState.flySpeed.acceleration = Math.max(
+                0,
+                cameraVectorsState.flySpeed.acceleration
+              - cameraVectorsState.flySpeed.friction
+            )
+
+            cameraVectorsState.position.y = Math.max(
+                cameraVectorsState.position.min.y,
+                cameraVectorsState.position.y
+              - cameraVectorsState.flySpeed.acceleration
+              * cameraVectorsState.flySpeed.direction
+            )
+            camera.position.y =
+                cameraVectorsState.flySpeed.acceleration === 0 ?
+                    camera.position.y :
+                    cameraVectorsState.position.y
+        }
     }
 
 }
@@ -270,15 +232,13 @@ function setControlOnKeyDown(event: KeyboardEvent) {
 
     addKeyToQueue(key)
     chooseKey()
-
     addFlyingKeyToQueue(event)
 }
 
 function setControlOnKeyUp(key: string, code: string) {
     deleteKeyFromQueue(key.toLowerCase())
     chooseKey()
-
-    deleteFliyingKeyFromQueue(code)
+    deleteFlyingKeyFromQueue(code)
 }
 
 function resetLocalQueues() {
@@ -305,7 +265,7 @@ export default function setFirstPersonPosition(canvasState: CanvasState) {
         getIsPassingBlacklist() && setControlOnKeyDown(event)
     })
     window.addEventListener('keyup', (event: KeyboardEvent) => {
-        getIsPassingBlacklist() && setControlOnKeyUp(event.key, event.code)
+        setControlOnKeyUp(event.key, event.code)
     })
     document.addEventListener('visibilitychange', (event: Event) => {
         if (document.hidden) resetLocalQueues()

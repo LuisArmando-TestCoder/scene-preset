@@ -4,8 +4,65 @@ import componentNames from './componentNames'
 
 export type CanvasStateCallback = (canvasState: CanvasState) => void
 
+export type ControlsBlacklist = (
+    'setFirstPersonZoom' |
+    'setFirstPersonPosition' |
+    'setFirstPersonFlying' |
+    'setFirstPersonDirection' |
+    'setCanvasAutoFocus'
+)[]
+
+export class KeyController {
+    keyAxes = {
+        ws: [],
+        ad: [],
+    }
+    chosenKey = ""
+    flyingKeys = []
+}
+
+export const keyController = new KeyController()
+
+export class CameraVectorsState {
+    position = {
+        x: 0,
+        z: 0,
+        y: 2,
+        min: {
+            y: 2
+        }
+    }
+    flySpeed = {
+        force: 0.005,
+        direction: 0,
+        friction: 0.0025,
+        acceleration: 0,
+        max: {
+            acceleration: 0.1
+        }
+    }
+    acceleration = {
+        x: 0,
+        z: 0,
+    }
+    friction = {
+        x: 0.005,
+        z: 0.005,
+    }
+    rotation = 0
+    chosenAxis = 'z'
+    top = {
+        acceleration: {
+            x: 0.05,
+            z: 0.05,
+        },
+    }
+}
+
+export const cameraVectorsState = new CameraVectorsState()
+
 export class PresetConfiguration {
-    controlsBlacklist: string[] = []
+    controlsBlacklist: ControlsBlacklist = []
     componentNames = componentNames
     ambient = {
         color: 0xffffff,
@@ -20,6 +77,7 @@ export class PresetConfiguration {
         XREnabled: true,
     }
     camera = {
+        cameraVectorsState,
         fov: 32,
         near: 0.1,
         far: 2000,

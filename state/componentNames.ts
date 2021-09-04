@@ -1,10 +1,10 @@
 export type ComponentNames = { [index: string]: string }
 
-function getComponentNames(breaklinedComponentNames: TemplateStringsArray) {
+function getComponentNames(breakComponentNames: TemplateStringsArray) {
     const componentNames: ComponentNames = {}
-    const parsedBreaklinedComponentNames: string[] = breaklinedComponentNames.raw[0].trim().split('\n')
+    const parsedBreakComponentNames: string[] = breakComponentNames.raw[0].trim().split('\n')
 
-    parsedBreaklinedComponentNames.forEach(componentName => {
+    parsedBreakComponentNames.forEach(componentName => {
         componentNames[componentName] = componentName
     })
 

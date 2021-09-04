@@ -10,16 +10,10 @@ import {
 import {
     MouseController,
 } from '../actions/setFirstPersonDirection'
-import {
-    KeyController,
-    CameraProperties,
-} from '../actions/setFirstPersonPosition'
 
 
 export type {
     MouseController,
-    KeyController,
-    CameraProperties,
     BlacklistParameters,
     WhitelistParameters,
     CanvasSave,
