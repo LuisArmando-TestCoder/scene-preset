@@ -8,7 +8,7 @@ export type Group = {
     geometry?: THREE.BufferGeometry
     material?: THREE.Material
     dimensions?: number[]
-    getIntersectionMesh: (indices: number[], mesh: THREE.Mesh) => THREE.Mesh
+    getIntersectionMesh: (indices: number[], mesh: THREE.Mesh) => THREE.Mesh | void
 }
 
 function callForDimensions(

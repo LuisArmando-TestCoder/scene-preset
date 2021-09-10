@@ -422,3 +422,16 @@ presetScene({
     },
 })
 ```
+
+The following is the representation of the type for each group
+
+In getIntersectionMesh if the mesh is not returned then it won't be rendered
+
+```ts
+type Group = {
+    geometry?: THREE.BufferGeometry
+    material?: THREE.Material
+    dimensions?: number[]
+    getIntersectionMesh: (indices: number[], mesh: THREE.Mesh) => THREE.Mesh | void
+}
+```
