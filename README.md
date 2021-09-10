@@ -391,3 +391,34 @@ type Rotation = number
 
 type ChosenAxis = 'x' | 'y' | 'z'
 ```
+
+## Set procedural group
+
+### consulters.getProceduralGroup
+
+```jsx
+import * as THREE from 'three'
+import presetScene, { consulters } from 'scene-preset'
+
+const cubesNet = consulters.getProceduralGroup([
+	{
+		geometry: new THREE.BoxBufferGeometry(.5, .5, .5),
+		getIntersectionMesh(indices, mesh) {
+			mesh.position.set(
+				indices[0],
+				indices[1],
+				indices[2]
+			)
+
+			return mesh
+		},
+		dimensions: [3, 3, 3]
+	}
+])
+
+presetScene({
+    setup({ scene }) {
+        scene.add(cubesNet)
+    },
+})
+```
