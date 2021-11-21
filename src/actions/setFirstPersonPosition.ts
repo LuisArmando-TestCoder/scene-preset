@@ -4,10 +4,10 @@ import { onKey } from "../events/index"
 import { cameraVectorsState, keyController } from "../state/canvases"
 import animations from "../state/animations"
 
-type Axes = 'ws' | 'ad'
-type Axis = 'x' | 'z'
-type FlyKeys = 'KeyR' | 'KeyF'
-type Keyboard = 'wa' | 'wd' | 'sa' | 'sd' | 'w' | 'a' | 's' | 'd'
+export type Axes = 'ws' | 'ad'
+export type Axis = 'x' | 'z'
+export type FlyKeys = 'KeyR' | 'KeyF'
+export type Keyboard = 'wa' | 'wd' | 'sa' | 'sd' | 'w' | 'a' | 's' | 'd'
 
 const auxiliaryCameraDirection = { x: Math.PI, y: Math.PI }
 

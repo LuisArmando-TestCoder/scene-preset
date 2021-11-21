@@ -1,6 +1,6 @@
 import { CanvasState } from "../types/state"
 
-type CameraEvent =
+export type CameraEvent =
   | MouseEvent
   | {
       movementX: 0

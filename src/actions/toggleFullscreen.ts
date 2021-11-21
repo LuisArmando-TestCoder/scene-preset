@@ -7,7 +7,9 @@ enum RequestFullScreenIndex {
   msRequestFullScreen = "msRequestFullScreen",
 }
 
-type RequestFullScreen = { [key in RequestFullScreenIndex]: () => void }
+export type RequestFullScreen = {
+  [key in RequestFullScreenIndex]: () => void
+}
 
 export default function toggleFullscreen(component: RequestFullScreen) {
   const requestFullScreen =

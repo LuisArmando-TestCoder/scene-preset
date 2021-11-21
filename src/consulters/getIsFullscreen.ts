@@ -4,12 +4,12 @@ enum IsFullScreenIndex {
   mozIsFullScreen = "mozIsFullScreen",
 }
 
-type isFullScreen = {
+export type IsFullScreen = {
   [key in IsFullScreenIndex]: boolean
 }
 
 export default function getIsFullscreen(): boolean {
-  const doc = document as any as isFullScreen
+  const doc = document as any as IsFullScreen
 
   return (
     doc["isFullScreen"] ||

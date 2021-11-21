@@ -1,6 +1,6 @@
-import { AnimationsState } from "../state/animations"
-import { AudiosState } from "../state/audios"
-import {
+import type { AnimationsState } from "../state/animations"
+import type { AudiosState } from "../state/audios"
+import type {
   KeyController,
   CameraVectorsState,
   CanvasStateCallback,
@@ -11,16 +11,16 @@ import {
   CanvasState,
   CanvasesState,
 } from "../state/canvases"
-import { ComponentNames } from "../state/componentNames"
-import { CustomUniform } from "../state/customUniforms"
-import {
+import type { ComponentNames } from "../state/componentNames"
+import type { CustomUniform } from "../state/customUniforms"
+import type {
   KeyLifeCycleName,
   KeyLifeCycleObject,
   Keys,
   Events,
   KeysState,
 } from "../state/keys"
-import { SceneSetupIntrudes } from "../state/sceneSetupIntrudes"
+import type { SceneSetupIntrudes } from "../state/sceneSetupIntrudes"
 
 export type {
   KeyController,

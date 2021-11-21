@@ -1,5 +1,5 @@
 // utils is internal only
-import * as types from "./types/index"
+import type * as types from "./types/index"
 import * as state from "./state/index"
 import * as events from "./events/index"
 import * as actions from "./actions/index"
