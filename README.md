@@ -313,7 +313,7 @@ AudioProperties contains the following properties:
 - source
 - initialized
 - frequencies
-- averageFrequecy
+- averageFrequency
 - amplitudes
 - averageAmplitude
 
