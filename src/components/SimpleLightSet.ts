@@ -27,12 +27,12 @@ function getDirectionalLight(): THREE.Light {
 export default class SimpleLightSet {
   hemisphereLight = getHemisphereLight()
   directionalLight = getDirectionalLight()
-  lightGroup = new THREE.Group()
+  object = new THREE.Group()
 
   constructor() {
-    this.lightGroup.name = componentNames.SimpleLightSet
+    this.object.name = componentNames.SimpleLightSet
 
-    this.lightGroup.add(this.hemisphereLight)
-    this.lightGroup.add(this.directionalLight)
+    this.object.add(this.hemisphereLight)
+    this.object.add(this.directionalLight)
   }
 }

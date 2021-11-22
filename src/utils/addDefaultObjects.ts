@@ -3,19 +3,16 @@ import * as THREE from "three"
 import { CanvasState } from "../types/state"
 import { componentNames } from "../state/index"
 
-import { SimpleLightSet, SimpleFloor, SimpleCube } from "../components/index"
+import * as components from "../components/index"
 
 function getDefaultObjects(): THREE.Group {
   const defaultObjects = new THREE.Group()
-  const simpleLightSet = new SimpleLightSet()
-  const simpleFloor = new SimpleFloor()
-  const simpleCube = new SimpleCube()
+
+  Object.values(components).forEach(Component => {
+    defaultObjects.add(new Component().object)
+  })
 
   defaultObjects.name = componentNames.DefaultObjects
-
-  defaultObjects.add(simpleLightSet.lightGroup)
-  defaultObjects.add(simpleFloor.mesh)
-  defaultObjects.add(simpleCube.mesh)
 
   return defaultObjects
 }
