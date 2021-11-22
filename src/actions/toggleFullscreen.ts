@@ -8,15 +8,16 @@ enum RequestFullScreenIndex {
 }
 
 export type RequestFullScreen = {
-  [key in RequestFullScreenIndex]: () => void
+  [key in RequestFullScreenIndex]?: () => void
 }
 
-export default function toggleFullscreen(component: RequestFullScreen) {
+export default function toggleFullscreen(component: HTMLElement) {
+  const requestElement = component as any as RequestFullScreen
   const requestFullScreen =
-    component["requestFullScreen"] ||
-    component["webkitRequestFullScreen"] ||
-    component["mozRequestFullScreen"] ||
-    component["msRequestFullScreen"]
+    requestElement["requestFullScreen"] ||
+    requestElement["webkitRequestFullScreen"] ||
+    requestElement["mozRequestFullScreen"] ||
+    requestElement["msRequestFullScreen"]
 
   if (getIsFullscreen()) {
     document.exitFullscreen()
@@ -24,5 +25,5 @@ export default function toggleFullscreen(component: RequestFullScreen) {
     return
   }
 
-  requestFullScreen.call(component)
+  requestFullScreen?.call(component)
 }
