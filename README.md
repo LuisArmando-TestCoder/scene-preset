@@ -49,11 +49,22 @@ actions.addSceneSetupIntrude((canvasState: types.state.CanvasState) => {
 List objects by the name in their mesh
 
 ```jsx
+import * as THREE from "three"
 import presetScene, { actions } from 'scene-preset'
 
 presetScene({ 
-	setup({ scene }) {
-		actions.blacklistObjects({ scene, blacklist: ['SimpleCube'] })
+	animate({ scene }) {
+		actions.blacklistObjects({
+            scene: scene as THREE.Scene,
+            blacklist: [
+				'SimpleCube', 'SimpleFloor'
+				/**
+				 * The remaining ones are:
+				 * - SimpleLightSet
+				 * - SimpleSphere
+				 */
+			]
+        })
     },
 })
 ```

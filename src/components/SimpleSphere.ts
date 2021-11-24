@@ -2,7 +2,7 @@ import * as THREE from "three"
 
 import { componentNames } from "../state/index"
 
-export default class SimpleCube {
+export default class SimpleSphere {
   radius = 1
   material = new THREE.MeshStandardMaterial({ color: 0x44ffff })
   geometry = new THREE.SphereBufferGeometry(this.radius / 2, 100, 100)
