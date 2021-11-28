@@ -7,7 +7,7 @@ import animations from "../state/animations"
 export type Axes = 'ws' | 'ad'
 export type Axis = 'x' | 'z'
 export type FlyKeys = 'KeyR' | 'KeyF'
-export type Keyboard = 'wa' | 'wd' | 'sa' | 'sd' | 'w' | 'a' | 's' | 'd'
+export type Keyboard = 'KeyWKeyA' | 'KeyWKeyD' | 'KeySKeyA' | 'KeySKeyD' | 'KeyW' | 'KeyA' | 'KeyS' | 'KeyD'
 
 const auxiliaryCameraDirection = { x: Math.PI, y: Math.PI }
 
@@ -60,15 +60,15 @@ const flyingKeys = {
 }
 
 const movementKeys = {
-  wa: move.left_forward,
-  wd: move.right_forward,
-  sa: move.left_backward,
-  sd: move.right_backward,
+  KeyWKeyA: move.left_forward,
+  KeyWKeyD: move.right_forward,
+  KeySKeyA: move.left_backward,
+  KeySKeyD: move.right_backward,
 
-  w: move.forward,
-  a: move.left,
-  s: move.backward,
-  d: move.right,
+  KeyW: move.forward,
+  KeyA: move.left,
+  KeyS: move.backward,
+  KeyD: move.right,
 }
 
 const validAxes = ["x", "z"]
@@ -137,7 +137,7 @@ function chooseKey() {
 
 function addKeyToQueue(key: string) {
   for (const keyAxis in keyController.keyAxes) {
-    const keyAxisQueue = keyController.keyAxes[keyAxis as  Axes]
+    const keyAxisQueue = keyController.keyAxes[keyAxis as Axes]
     if (keyAxis.includes(key) && !keyAxisQueue.includes(key)) {
       keyAxisQueue.push(key)
       break
@@ -240,8 +240,8 @@ function setControlOnKeyDown(event: KeyboardEvent) {
   addFlyingKeyToQueue(event)
 }
 
-function setControlOnKeyUp(key: string, code: string) {
-  deleteKeyFromQueue(key.toLowerCase())
+function setControlOnKeyUp(code: string) {
+  deleteKeyFromQueue(code)
   chooseKey()
   deleteFlyingKeyFromQueue(code)
 }
@@ -259,7 +259,7 @@ function resetLocalQueues() {
 export default function setFirstPersonPosition(canvasState: CanvasState) {
   animations.push(updateFirstPersonPosition)
 
-  const controls = ["w", "s", "d", "a", "r", "f"]
+  const controls = ["KeyW", "KeyS", "KeyD", "KeyA", "KeyR", "KeyF"]
 
   controls.forEach(onKey)
 
@@ -271,7 +271,7 @@ export default function setFirstPersonPosition(canvasState: CanvasState) {
     getIsPassingBlacklist() && setControlOnKeyDown(event)
   })
   window.addEventListener("keyup", (event: KeyboardEvent) => {
-    setControlOnKeyUp(event.key, event.code)
+    setControlOnKeyUp(event.code)
   })
   document.addEventListener("visibilitychange", (event: Event) => {
     if (document.hidden) resetLocalQueues()
