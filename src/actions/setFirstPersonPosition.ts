@@ -4,7 +4,7 @@ import { onKey } from "../events/index"
 import { cameraVectorsState, keyController } from "../state/canvases"
 import animations from "../state/animations"
 
-export type Axes = 'ws' | 'ad'
+export type Axes = 'KeyWKeyS' | 'KeyAKeyD'
 export type Axis = 'x' | 'z'
 export type FlyKeys = 'KeyR' | 'KeyF'
 export type Keyboard = 'KeyWKeyA' | 'KeyWKeyD' | 'KeySKeyA' | 'KeySKeyD' | 'KeyW' | 'KeyA' | 'KeyS' | 'KeyD'
@@ -124,14 +124,14 @@ function setMoveOnKeyDown() {
 function chooseKey() {
   keyController.chosenKey = ""
 
-  if (keyController.keyAxes.ws.length) {
+  if (keyController.keyAxes.KeyWKeyS.length) {
     keyController.chosenKey =
-      keyController.keyAxes.ws[keyController.keyAxes.ws.length - 1]
+      keyController.keyAxes.KeyWKeyS[keyController.keyAxes.KeyWKeyS.length - 1]
   }
 
-  if (keyController.keyAxes.ad.length) {
+  if (keyController.keyAxes.KeyAKeyD.length) {
     keyController.chosenKey +=
-      keyController.keyAxes.ad[keyController.keyAxes.ad.length - 1]
+      keyController.keyAxes.KeyAKeyD[keyController.keyAxes.KeyAKeyD.length - 1]
   }
 }
 
@@ -233,9 +233,7 @@ function updateFirstPersonPosition(canvasState: CanvasState) {
 }
 
 function setControlOnKeyDown(event: KeyboardEvent) {
-  const key = event.key.toLowerCase()
-
-  addKeyToQueue(key)
+  addKeyToQueue(event.code)
   chooseKey()
   addFlyingKeyToQueue(event)
 }

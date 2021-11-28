@@ -14,11 +14,11 @@ export type ControlsBlacklist = (
 
 export class KeyController {
   keyAxes: {
-    ws: string[],
-    ad: string[],
+    KeyWKeyS: string[],
+    KeyAKeyD: string[],
   } = {
-    ws: [],
-    ad: [],
+    KeyWKeyS: [],
+    KeyAKeyD: [],
   }
   chosenKey = ""
   flyingKeys: string[] = []
