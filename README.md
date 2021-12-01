@@ -449,6 +449,39 @@ type Group = {
 
 ## Use getSceneLifeCycle
 
+### Types for Scene
+
+```ts
+type SceneExport = {
+  object3D: THREE.Object3D
+  [index: string]: any
+}
+type SceneExportForScene = {
+  object3D: THREE.Object3D | Promise<Object3D>[] | Object3D[]
+  [index: string]: any
+}
+type ExportedScene = {
+  [index: string]: SceneExport
+}
+type Scene = {
+  properties?: {
+    position?: THREE.Vector3
+    rotation?: THREE.Vector3
+    scale?: THREE.Vector3
+  }
+  object?: () =>
+    | Promise<Object3D>
+    | Object3D
+    | Promise<Object3D>[]
+    | Object3D[]
+    | Promise<SceneExport>
+    | SceneExport
+    | SceneExportForScene
+  onAnimation?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
+  onSetup?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
+}
+```
+
 ### On someScene.ts
 
 ```ts
