@@ -3,6 +3,14 @@ import type {
   Vector3D,
   TransformVectors,
 } from "../consulters/getAssembledMeshesGroup"
+import type {
+  SceneExport,
+  SceneExportForScene,
+  ExportedScene,
+  Object3D,
+  Scene,
+  Scenes,
+} from "../consulters/getSceneLifeCycle"
 import type { FreeObject, Group } from "../consulters/getProceduralGroup"
 import type { IsFullScreen } from "../consulters/getIsFullscreen"
 
@@ -13,4 +21,10 @@ export type {
   AssemblyMeshesGroupOptions,
   Vector3D,
   TransformVectors,
+  SceneExport,
+  SceneExportForScene,
+  ExportedScene,
+  Object3D,
+  Scene,
+  Scenes,
 }
