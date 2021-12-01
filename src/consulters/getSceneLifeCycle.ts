@@ -6,13 +6,12 @@ export type SceneExport = {
   [index: string]: any
 }
 export type SceneExportForScene = {
-  object3D: THREE.Object3D | Promise<Object3D>[] | Object3D[]
+  object3D: THREE.Object3D | Promise<THREE.Object3D>[] | THREE.Object3D[]
   [index: string]: any
 }
 export type ExportedScene = {
   [index: string]: SceneExport
 }
-export type Object3D = THREE.Mesh | THREE.Group | THREE.Object3D
 export type Scene = {
   properties?: {
     position?: THREE.Vector3
@@ -20,10 +19,10 @@ export type Scene = {
     scale?: THREE.Vector3
   }
   object?: () =>
-    | Promise<Object3D>
-    | Object3D
-    | Promise<Object3D>[]
-    | Object3D[]
+    | Promise<THREE.Object3D>
+    | THREE.Object3D
+    | Promise<THREE.Object3D>[]
+    | THREE.Object3D[]
     | Promise<SceneExport>
     | SceneExport
     | SceneExportForScene
@@ -35,15 +34,15 @@ export type Scenes = {
 }
 
 async function getArrayGroup(
-  objects: (Object3D | Promise<Object3D>)[],
+  objects: (THREE.Object3D | Promise<THREE.Object3D>)[],
   key: string
 ): Promise<THREE.Group> {
   const group = new THREE.Group()
 
   for (const [index, innerObject] of Object.entries(objects)) {
-    let child: Object3D = innerObject as Object3D
+    let child: THREE.Object3D = innerObject as THREE.Object3D
 
-    if (typeof (innerObject as Promise<Object3D>)?.then === "function") {
+    if (typeof (innerObject as Promise<THREE.Object3D>)?.then === "function") {
       try {
         child = await innerObject
       } catch {
@@ -59,7 +58,7 @@ async function getArrayGroup(
   return group
 }
 
-function assignObjectVectors(object3D: Object3D, scene: Scene) {
+function assignObjectVectors(object3D: THREE.Object3D, scene: Scene) {
   ;(["position", "scale", "rotation"] as const).forEach(property => {
     const defaultValue = property === "scale" ? 1 : 0
     const getAxis = (axisName: "x" | "y" | "z") =>
@@ -105,7 +104,7 @@ async function exportObject3D({
   exportedScene,
   key,
 }: {
-  object3D: Object3D | Object3D[] | Promise<Object3D>[]
+  object3D: THREE.Object3D | THREE.Object3D[] | Promise<THREE.Object3D>[]
   exportedScene: ExportedScene
   key: string
 }) {
@@ -127,7 +126,7 @@ async function exportScene({
   exportedScene,
   key,
 }: {
-  exportable: Object3D | Object3D[] | Promise<Object3D>[] | SceneExport
+  exportable: THREE.Object3D | THREE.Object3D[] | Promise<THREE.Object3D>[] | SceneExport
   exportedScene: ExportedScene
   key: string
 }) {
@@ -138,7 +137,7 @@ async function exportScene({
   })
 
   await exportObject3D({
-    object3D: exportable as Object3D,
+    object3D: exportable as THREE.Object3D,
     exportedScene,
     key,
   })
@@ -158,7 +157,7 @@ export default async (scenes: Scenes) => {
     }
 
     const promisedObject = (await getDefinitePromise(retrievedObject)) as
-      | Object3D
+      | THREE.Object3D
       | SceneExport
 
     await exportScene({

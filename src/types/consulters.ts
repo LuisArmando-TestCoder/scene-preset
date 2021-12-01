@@ -7,7 +7,6 @@ import type {
   SceneExport,
   SceneExportForScene,
   ExportedScene,
-  Object3D,
   Scene,
   Scenes,
 } from "../consulters/getSceneLifeCycle"
@@ -24,7 +23,6 @@ export type {
   SceneExport,
   SceneExportForScene,
   ExportedScene,
-  Object3D,
   Scene,
   Scenes,
 }

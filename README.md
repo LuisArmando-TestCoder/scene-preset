@@ -457,7 +457,7 @@ type SceneExport = {
   [index: string]: any
 }
 type SceneExportForScene = {
-  object3D: THREE.Object3D | Promise<Object3D>[] | Object3D[]
+  object3D: THREE.Object3D | Promise<THREE.Object3D>[] | THREE.Object3D[]
   [index: string]: any
 }
 type ExportedScene = {
@@ -470,15 +470,18 @@ type Scene = {
     scale?: THREE.Vector3
   }
   object?: () =>
-    | Promise<Object3D>
-    | Object3D
-    | Promise<Object3D>[]
-    | Object3D[]
+    | Promise<THREE.Object3D>
+    | THREE.Object3D
+    | Promise<THREE.Object3D>[]
+    | THREE.Object3D[]
     | Promise<SceneExport>
     | SceneExport
     | SceneExportForScene
   onAnimation?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
   onSetup?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
+}
+type Scenes = {
+  [index: string]: Scene
 }
 ```
 
