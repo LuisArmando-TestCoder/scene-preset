@@ -17,6 +17,7 @@ const componentNames: ComponentNames = getComponentNames`
 DefaultObjects
 SimpleLightSet
 SimpleCube
+SimpleSphere
 SimpleFloor
 `
 

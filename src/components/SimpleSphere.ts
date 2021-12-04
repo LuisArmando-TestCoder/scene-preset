@@ -14,6 +14,6 @@ export default class SimpleSphere {
     this.object.position.y = this.radius * 2
     this.object.castShadow = true
     this.object.receiveShadow = false
-    this.object.name = componentNames.SimpleCube
+    this.object.name = componentNames.SimpleSphere
   }
 }
