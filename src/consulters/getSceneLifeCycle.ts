@@ -1,4 +1,9 @@
+
+// ts-ignore
+/* eslint-disable */
 import * as THREE from "three"
+/* eslint-enable */
+
 import { CanvasState } from "../types/state"
 
 export type SceneExport = {
