@@ -4,13 +4,12 @@ import { componentNames } from "../state/index"
 
 export default class SimpleSphere {
   radius = 1
-  material = new THREE.MeshStandardMaterial({ color: 0x44ffff })
+  color = 0x44ffff
+  material = new THREE.MeshStandardMaterial({ color: this.color })
   geometry = new THREE.SphereBufferGeometry(this.radius / 2, 100, 100)
-  object: THREE.Mesh
+  object = new THREE.Mesh(this.geometry, this.material)
 
   constructor() {
-    this.object = new THREE.Mesh(this.geometry, this.material)
-
     this.object.position.y = this.radius * 2
     this.object.castShadow = true
     this.object.receiveShadow = false

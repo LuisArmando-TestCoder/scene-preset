@@ -5,10 +5,9 @@ import { componentNames } from "../state/index"
 export default class SimpleFloor {
   material = new THREE.MeshStandardMaterial({ color: 0xcccccc })
   geometry = new THREE.PlaneGeometry(200, 200)
-  object: THREE.Mesh
+  object = new THREE.Mesh(this.geometry, this.material)
 
   constructor() {
-    this.object = new THREE.Mesh(this.geometry, this.material)
 
     this.object.rotation.x = -Math.PI / 2
     this.object.receiveShadow = true
