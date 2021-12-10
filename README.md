@@ -262,6 +262,33 @@ import { actions } from 'scene-preset'
 actions.toggleFullscreen(canvas.parentElement)
 ```
 
+## Change initial camera top acceleration and friction
+
+### actions.addSceneSetupIntrude and presetConfiguration.camera.cameraVectorsState
+
+```ts
+import presetScene, { actions, types, } from 'scene-preset'
+
+actions.addSceneSetupIntrude(({ presetConfiguration }: types.state.CanvasState) => {
+  presetConfiguration.camera.cameraVectorsState.top.acceleration.x = .5
+  presetConfiguration.camera.cameraVectorsState.top.acceleration.z = .5
+  presetConfiguration.camera.cameraVectorsState.friction.x = .05
+  presetConfiguration.camera.cameraVectorsState.friction.z = .05
+})
+```
+
+## Change initial camera focal length
+
+### actions.addSceneSetupIntrude and camera?.setFocalLength
+
+```ts
+import presetScene, { actions, types, } from 'scene-preset'
+
+actions.addSceneSetupIntrude(({ camera }: types.state.CanvasState) => {
+  camera?.setFocalLength(20)
+})
+```
+
 ## Toggle VR view
 
 ### actions.toggleVR
