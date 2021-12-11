@@ -10,8 +10,8 @@ export type Group = {
   dimensions?: number[]
   getIntersectionMesh: (
     indices: number[],
-    mesh: THREE.Mesh
-  ) => THREE.Mesh | void
+    object3D: THREE.Object3D
+  ) => THREE.Object3D | Promise<THREE.Object3D> | void
 }
 
 function callForDimensions(
@@ -59,6 +59,14 @@ export default (groups: Group[]) => {
       )
 
       if (intersectionMesh) {
+        const promisedObject = intersectionMesh as Promise<THREE.Object3D>
+
+        if (promisedObject.then) {
+          promisedObject.then(object3D => proceduralGroup.add(object3D))
+
+          return
+        }
+
         proceduralGroup.add(intersectionMesh as any)
       }
     })

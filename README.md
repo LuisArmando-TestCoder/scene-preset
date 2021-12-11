@@ -442,6 +442,7 @@ const cubesNet = consulters.getProceduralGroup([
 	{
 		geometry: new THREE.BoxBufferGeometry(.5, .5, .5),
 		getIntersectionMesh(indices, mesh) {
+      // this function can be asynchronous as well
 			mesh.position.set(
 				indices[0],
 				indices[1],
