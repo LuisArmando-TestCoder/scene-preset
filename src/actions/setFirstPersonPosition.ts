@@ -4,10 +4,18 @@ import { onKey } from "../events/index"
 import { cameraVectorsState, keyController } from "../state/canvases"
 import animations from "../state/animations"
 
-export type Axes = 'KeyWKeyS' | 'KeyAKeyD'
-export type Axis = 'x' | 'z'
-export type FlyKeys = 'KeyR' | 'KeyF'
-export type Keyboard = 'KeyWKeyA' | 'KeyWKeyD' | 'KeySKeyA' | 'KeySKeyD' | 'KeyW' | 'KeyA' | 'KeyS' | 'KeyD'
+export type Axes = "KeyWKeyS" | "KeyAKeyD"
+export type Axis = "x" | "z"
+export type FlyKeys = "KeyR" | "KeyF"
+export type Keyboard =
+  | "KeyWKeyA"
+  | "KeyWKeyD"
+  | "KeySKeyA"
+  | "KeySKeyD"
+  | "KeyW"
+  | "KeyA"
+  | "KeyS"
+  | "KeyD"
 
 const auxiliaryCameraDirection = { x: Math.PI, y: Math.PI }
 
@@ -82,10 +90,12 @@ function reduceFirstPersonPositionAcceleration() {
   const key = "acceleration"
   const obj = cameraVectorsState
   validAxes.forEach(axis => {
-    const surpassingFriction = Math.abs(obj[key][axis as Axis]) > obj.friction[axis as Axis] / 2
+    const surpassingFriction =
+      Math.abs(obj[key][axis as Axis]) > obj.friction[axis as Axis] / 2
     if (surpassingFriction) {
       obj[key][axis as Axis] +=
-        -Math.sign(obj[key][axis as Axis]) * (obj.friction[axis as Axis] / frictionResistance)
+        -Math.sign(obj[key][axis as Axis]) *
+        (obj.friction[axis as Axis] / frictionResistance)
     } else {
       obj[key][axis as Axis] = 0
     }
@@ -117,7 +127,8 @@ function setMoveOnKeyDown() {
 
     const { acceleration, friction, chosenAxis } = cameraVectorsState
 
-    acceleration[chosenAxis as Axis] += friction[chosenAxis as Axis] * frictionResistance
+    acceleration[chosenAxis as Axis] +=
+      friction[chosenAxis as Axis] * frictionResistance
   }
 }
 
@@ -165,7 +176,9 @@ function triggerFlyCode() {
         cameraVectorsState.flySpeed.force
     )
 
-    flyingKeys[keyController.flyingKeys[keyController.flyingKeys.length - 1] as FlyKeys]()
+    flyingKeys[
+      keyController.flyingKeys[keyController.flyingKeys.length - 1] as FlyKeys
+    ]()
   }
 }
 
@@ -178,7 +191,9 @@ function deleteFlyingKeyFromQueue(code: string) {
 }
 
 function addFlyingKeyToQueue(event: KeyboardEvent) {
-  const validFlyingCode = flyingKeys[event.code as FlyKeys] as (() => void) | undefined
+  const validFlyingCode = flyingKeys[event.code as FlyKeys] as
+    | (() => void)
+    | undefined
 
   if (validFlyingCode) {
     const isKeyAlreadyInQueue = keyController.flyingKeys.includes(event.code)

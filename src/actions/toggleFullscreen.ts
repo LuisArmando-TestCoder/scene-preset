@@ -12,7 +12,7 @@ export type RequestFullScreen = {
 }
 
 export default function toggleFullscreen(component: HTMLElement) {
-  const requestElement = component as any as RequestFullScreen
+  const requestElement = (component as any) as RequestFullScreen
   const requestFullScreen =
     requestElement["requestFullScreen"] ||
     requestElement["webkitRequestFullScreen"] ||

@@ -1,4 +1,3 @@
-
 // ts-ignore
 /* eslint-disable */
 import * as THREE from "three"
@@ -131,7 +130,11 @@ async function exportScene({
   exportedScene,
   key,
 }: {
-  exportable: THREE.Object3D | THREE.Object3D[] | Promise<THREE.Object3D>[] | SceneExport
+  exportable:
+    | THREE.Object3D
+    | THREE.Object3D[]
+    | Promise<THREE.Object3D>[]
+    | SceneExport
   exportedScene: ExportedScene
   key: string
 }) {

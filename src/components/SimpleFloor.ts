@@ -8,7 +8,6 @@ export default class SimpleFloor {
   object = new THREE.Mesh(this.geometry, this.material)
 
   constructor() {
-
     this.object.rotation.x = -Math.PI / 2
     this.object.receiveShadow = true
     this.object.castShadow = false

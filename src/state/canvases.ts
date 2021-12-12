@@ -14,8 +14,8 @@ export type ControlsBlacklist = (
 
 export class KeyController {
   keyAxes: {
-    KeyWKeyS: string[],
-    KeyAKeyD: string[],
+    KeyWKeyS: string[]
+    KeyAKeyD: string[]
   } = {
     KeyWKeyS: [],
     KeyAKeyD: [],

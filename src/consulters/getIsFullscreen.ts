@@ -9,11 +9,9 @@ export type IsFullScreen = {
 }
 
 export default function getIsFullscreen(): boolean {
-  const doc = document as any as IsFullScreen
+  const doc = (document as any) as IsFullScreen
 
   return (
-    doc["isFullScreen"] ||
-    doc["webkitIsFullScreen"] ||
-    doc["mozIsFullScreen"]
+    doc["isFullScreen"] || doc["webkitIsFullScreen"] || doc["mozIsFullScreen"]
   )
 }
