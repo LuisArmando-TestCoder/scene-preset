@@ -187,12 +187,23 @@ export default async (scenes: Scenes) => {
     }
   )
 
+  let exportedState: { [index: string]: any } = {}
+
   const executeObjectsEvents = (
     canvasState: CanvasState,
     callType: "onSetup" | "onAnimation"
-  ) => {
+  ): { [index: string]: any } | void => {
     Object.keys(scenes).forEach((key: string) => {
-      scenes[key][callType]?.(exportedScene[key], canvasState)
+      const exported = scenes[key][callType]?.(
+        callType === "onAnimation" && exportedState[key]
+          ? { ...exportedScene[key], exported: exportedState[key] }
+          : exportedScene[key],
+        canvasState
+      )
+
+      if (callType === "onSetup" && exported) {
+        exportedState[key] = exported
+      }
     })
   }
 
