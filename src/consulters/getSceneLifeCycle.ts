@@ -7,6 +7,7 @@ import { CanvasState } from "../types/state"
 
 export type SceneExport = {
   object3D: THREE.Object3D
+  exported?: any
   [index: string]: any
 }
 export type SceneExportForScene = {
