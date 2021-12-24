@@ -28,6 +28,8 @@
     "lib/**/*"
   ],
   "devDependencies": {
+    "@types/body-scroll-lock": "^3.1.0",
+    "@types/three": "^0.135.0",
     "typescript": "^4.5.4"
   }
 }

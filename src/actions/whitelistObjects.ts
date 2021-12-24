@@ -1,3 +1,5 @@
+import * as THREE from "three"
+
 export interface WhitelistParameters {
   scene: THREE.Scene
   whitelist: string[]
@@ -8,7 +10,7 @@ export default function whitelistObjects(
   whitelistParameters: WhitelistParameters
 ) {
   ;(whitelistParameters.objects || whitelistParameters.scene.children).forEach(
-    object => {
+    (object: THREE.Object3D) => {
       if (!whitelistParameters.whitelist.includes(object.name)) {
         let hasSonInWhitelist = false
 

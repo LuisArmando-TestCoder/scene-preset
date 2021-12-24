@@ -1,3 +1,5 @@
+import * as THREE from "three"
+
 export interface BlacklistParameters {
   scene: THREE.Scene
   blacklist: string[]
@@ -8,7 +10,7 @@ export default function blacklistObjects(
   blacklistParameters: BlacklistParameters
 ) {
   ;(blacklistParameters.objects || blacklistParameters.scene.children).forEach(
-    object => {
+    (object: THREE.Object3D) => {
       blacklistParameters.blacklist.forEach(name => {
         if (object.name === name) {
           const chosenParent = object.parent || blacklistParameters.scene

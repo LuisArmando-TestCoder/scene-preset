@@ -1,7 +1,4 @@
-// ts-ignore
-/* eslint-disable */
 import * as THREE from "three"
-/* eslint-enable */
 
 import { CanvasState } from "../types/state"
 
@@ -31,8 +28,8 @@ export type Scene = {
     | Promise<SceneExport>
     | SceneExport
     | SceneExportForScene
-  onAnimation?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
-  onSetup?: (exportedScene: ExportedScene, canvasState: CanvasState) => {}
+  onAnimation?: (sceneExport: SceneExport, canvasState: CanvasState) => {}
+  onSetup?: (sceneExport: SceneExport, canvasState: CanvasState) => {}
 }
 export type Scenes = {
   [index: string]: Scene
@@ -183,7 +180,7 @@ export default async (scenes: Scenes) => {
   })
 
   Object.values(await Promise.all(objectRequests.filter(x => x))).forEach(
-    sceneExport => {
+    (sceneExport: SceneExport) => {
       sceneExport && sceneGroup.add(sceneExport.object3D)
     }
   )
