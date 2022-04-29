@@ -1,7 +1,7 @@
 import { CanvasState } from "../types/state"
 
 function setControlOnWheel(event: WheelEvent, canvasState: CanvasState) {
-  if (canvasState?.camera) {
+  if (canvasState && canvasState.camera) {
     const delta = -Math.sign(event.deltaY)
     const zoom = Math.min(
       canvasState.presetConfiguration.camera.zoom.max,
@@ -22,13 +22,15 @@ export default function setFirstPersonZoom(canvasState: CanvasState) {
   // Added non-passive event listener to a scroll-blocking 'wheel' event
   // Consider marking event handler as 'passive' to make the page more responsive
   // See https://www.chromestatus.com/feature/5745543795965952
-  canvasState?.canvas?.addEventListener(
-    "wheel",
-    event => {
-      if (!controlsBlacklist.includes("setFirstPersonZoom")) {
-        setControlOnWheel(event, canvasState)
-      }
-    },
-    { passive: true }
-  )
+  if (canvasState && canvasState.canvas) {
+    canvasState.canvas.addEventListener(
+      "wheel",
+      event => {
+        if (!controlsBlacklist.includes("setFirstPersonZoom")) {
+          setControlOnWheel(event, canvasState)
+        }
+      },
+      { passive: true }
+    )
+  }
 }

@@ -3,14 +3,16 @@ import { KeyLifeCycleName } from "../types/state"
 
 export default class Triggerer {
   triggerCallbacks(keyLifeCycleName: KeyLifeCycleName, key: string) {
-    const lifeCycle = keysState?.keys?.[key]
+    if (keysState && keysState.keys) {
+      const lifeCycle = keysState.keys[key]
 
-    if (lifeCycle) {
-      const callbacks = lifeCycle[keyLifeCycleName]
+      if (lifeCycle) {
+        const callbacks = lifeCycle[keyLifeCycleName]
 
-      callbacks.forEach((callback: Function) => {
-        callback(keysState.events[key])
-      })
+        callbacks.forEach((callback: Function) => {
+          callback(keysState.events[key])
+        })
+      }
     }
   }
 

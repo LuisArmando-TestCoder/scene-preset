@@ -32,7 +32,9 @@ export default function onClickIntersectsObject(
   callback: Function,
   canvasSelector = "canvas"
 ) {
-  if (!getCanvasState(canvasSelector)?.intersectionUtils) {
+  const firstCanvasState = getCanvasState(canvasSelector)
+
+  if (firstCanvasState && !firstCanvasState.intersectionUtils) {
     const canvas: HTMLCanvasElement | null = document.querySelector(
       canvasSelector
     )
@@ -50,29 +52,36 @@ export default function onClickIntersectsObject(
       }
     }
 
-    canvas?.addEventListener("click", (event: MouseEvent) => {
-      const x =
-        (event.clientX / window.innerWidth) * canvas?.clientWidth +
-        window.scrollX +
-        canvas?.getBoundingClientRect().left
+    if (canvas) {
+      canvas.addEventListener("click", (event: MouseEvent) => {
+        const x =
+          (event.clientX / window.innerWidth) * canvas.clientWidth +
+          window.scrollX +
+          canvas.getBoundingClientRect().left
+  
+        const y =
+          (event.clientY / window.innerHeight) * canvas.clientHeight +
+          window.scrollY +
+          canvas.getBoundingClientRect().top
+  
+        mouse.set(
+          (x / canvas.clientWidth) * 2 - 1,
+          (y / canvas.clientHeight) * -2 + 1
+        )
 
-      const y =
-        (event.clientY / window.innerHeight) * canvas?.clientHeight +
-        window.scrollY +
-        canvas?.getBoundingClientRect().top
+        const canvasState = getCanvasState(canvasSelector)
+  
+        if (canvasState) {
+          raycaster.setFromCamera(
+            mouse,
+            canvasState.camera as THREE.Camera
+          )
+        }
+  
+        handleObjectIntersection(canvasSelector)
+      })
+    }
 
-      mouse.set(
-        (x / canvas?.clientWidth) * 2 - 1,
-        (y / canvas?.clientHeight) * -2 + 1
-      )
-
-      raycaster.setFromCamera(
-        mouse,
-        getCanvasState(canvasSelector)?.camera as THREE.Camera
-      )
-
-      handleObjectIntersection(canvasSelector)
-    })
   }
 
   const canvasState = getCanvasState(canvasSelector)

@@ -42,7 +42,7 @@ function setCameraSight(event: CameraEvent) {
     const control = mouseController
     setCameraDirection(event)
 
-    if (control?.camera && control?.cameraDirection) {
+    if (control && control.camera && control.cameraDirection) {
       control.lookAt.x =
         control.camera.position.x + Math.sin(control.cameraDirection.x)
       control.lookAt.y =
@@ -118,7 +118,7 @@ export default function setFirstPersonDirection(canvasState: CanvasState) {
   const getIsPassingBlacklist = () =>
     !controlsBlacklist.includes("setFirstPersonDirection")
 
-  if (canvasState?.canvas) {
+  if (canvasState && canvasState.canvas) {
     canvasState.canvas.addEventListener("mousemove", (event: MouseEvent) => {
       getIsPassingBlacklist() && setCameraSight(event)
     })

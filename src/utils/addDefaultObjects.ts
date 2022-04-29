@@ -20,5 +20,7 @@ function getDefaultObjects(): THREE.Group {
 export default function addDefaultObjects(canvasState: CanvasState) {
   const defaultObjects = getDefaultObjects()
 
-  canvasState?.scene?.add(defaultObjects)
+  if (canvasState && canvasState.scene) {
+    canvasState.scene.add(defaultObjects)
+  }
 }

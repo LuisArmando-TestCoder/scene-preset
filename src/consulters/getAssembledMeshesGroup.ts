@@ -42,10 +42,15 @@ function setVector3D({
   defaultValue?: number
   defaultVector?: Vector3D
 }) {
+  const vector = defaultVector || {
+    x: defaultValue,
+    y: defaultValue,
+    z: defaultValue,
+  }
   originalVector.set(
-    newVector.x || (defaultVector?.x ?? defaultValue),
-    newVector.y || (defaultVector?.y ?? defaultValue),
-    newVector.z || (defaultVector?.z ?? defaultValue)
+    (newVector.x || vector.x as number),
+    (newVector.y || vector.y as number),
+    (newVector.z || vector.z as number)
   )
 }
 
@@ -81,10 +86,10 @@ export default ({
   group.name = name
 
   const currentGeometry =
-    geometry ??
+    geometry ||
     new THREE.BoxBufferGeometry(size.x || 1, size.y || 1, size.z || 1)
   const currentMaterial =
-    material ??
+    material ||
     new THREE.ShaderMaterial({
       fragmentShader,
       vertexShader,
@@ -105,7 +110,7 @@ export default ({
     for (let index = 0; index < amount; index++) {
       const childMesh = mesh.clone()
 
-      const transformVectors = setupChildPosition?.(index, amount, childMesh)
+      const transformVectors = setupChildPosition && setupChildPosition(index, amount, childMesh)
 
       if (transformVectors) {
         setMeshTransform(childMesh, transformVectors)
@@ -115,7 +120,7 @@ export default ({
     }
   }
 
-  setupGroup?.(group, mesh)
+  setupGroup && setupGroup(group, mesh)
 
   return {
     currentGeometry,

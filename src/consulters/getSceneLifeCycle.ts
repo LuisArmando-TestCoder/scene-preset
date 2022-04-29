@@ -35,6 +35,10 @@ export type Scenes = {
   [index: string]: Scene
 }
 
+function isPromise(value: any) {
+  return !!value && typeof value.then === "function"
+}
+
 async function getArrayGroup(
   objects: (THREE.Object3D | Promise<THREE.Object3D>)[],
   key: string
@@ -44,7 +48,7 @@ async function getArrayGroup(
   for (const [index, innerObject] of Object.entries(objects)) {
     let child: THREE.Object3D = innerObject as THREE.Object3D
 
-    if (typeof (innerObject as Promise<THREE.Object3D>)?.then === "function") {
+    if (isPromise(innerObject as Promise<THREE.Object3D>)) {
       try {
         child = await innerObject
       } catch {
@@ -63,8 +67,15 @@ async function getArrayGroup(
 function assignObjectVectors(object3D: THREE.Object3D, scene: Scene) {
   ;(["position", "scale", "rotation"] as const).forEach(property => {
     const defaultValue = property === "scale" ? 1 : 0
-    const getAxis = (axisName: "x" | "y" | "z") =>
-      (scene.properties?.[property]?.[axisName] as number) || defaultValue
+    const getAxis = (axisName: "x" | "y" | "z") => {
+      const transform = scene.properties && scene.properties[property]
+
+      if (transform) {
+        return (transform[axisName] as number) || defaultValue
+      }
+
+      return defaultValue
+    }
 
     object3D[property].set(getAxis("x"), getAxis("y"), getAxis("z"))
   })
@@ -72,7 +83,7 @@ function assignObjectVectors(object3D: THREE.Object3D, scene: Scene) {
 
 async function getDefinitePromise(value: Promise<any> | any): Promise<any> {
   try {
-    return typeof value?.then === "function" ? await value : value
+    return isPromise(value) ? await value : value
   } catch {
     throw new Error(`Error on definite promise ${value}`)
   }
@@ -157,7 +168,7 @@ export default async (scenes: Scenes) => {
     let retrievedObject
 
     try {
-      retrievedObject = scene?.object?.()
+      retrievedObject = scene && scene.object && scene.object()
     } catch {
       throw new Error(`Error on object function ${key}`)
     }
@@ -192,15 +203,18 @@ export default async (scenes: Scenes) => {
     callType: "onSetup" | "onAnimation"
   ): { [index: string]: any } | void => {
     Object.keys(scenes).forEach((key: string) => {
-      const exported = scenes[key][callType]?.(
-        callType === "onAnimation" && exportedState[key]
-          ? { ...exportedScene[key], exported: exportedState[key] }
-          : exportedScene[key],
-        canvasState
-      )
+      const sceneLifeCycleMethod = scenes[key][callType]
+      if (sceneLifeCycleMethod) {
+        const exported = sceneLifeCycleMethod(
+          callType === "onAnimation" && exportedState[key]
+            ? { ...exportedScene[key], exported: exportedState[key] }
+            : exportedScene[key],
+          canvasState
+        )
 
-      if (callType === "onSetup" && exported) {
-        exportedState[key] = exported
+        if (callType === "onSetup" && exported) {
+          exportedState[key] = exported
+        }
       }
     })
   }
@@ -208,7 +222,7 @@ export default async (scenes: Scenes) => {
   return {
     sceneGroup,
     onSetup(canvasState: CanvasState) {
-      canvasState?.scene?.add(sceneGroup)
+      canvasState && canvasState.scene && canvasState.scene.add(sceneGroup)
 
       executeObjectsEvents(canvasState, "onSetup")
     },

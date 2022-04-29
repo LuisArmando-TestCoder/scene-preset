@@ -9,13 +9,13 @@ export default function setCameraAutoFocus(canvasState: CanvasState) {
   if (canvasState.canvas) {
     canvasState.canvas.addEventListener("mouseout", () => {
       if (getIsPassingBlacklist()) {
-        canvasState.canvas?.blur()
+        canvasState.canvas && canvasState.canvas.blur()
         enableBodyScroll(document.body)
       }
     })
     canvasState.canvas.addEventListener("mouseenter", () => {
       if (getIsPassingBlacklist()) {
-        canvasState.canvas?.focus()
+        canvasState.canvas && canvasState.canvas.focus()
         disableBodyScroll(document.body)
       }
     })

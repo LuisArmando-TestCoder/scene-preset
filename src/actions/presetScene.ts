@@ -32,9 +32,9 @@ function setAnimationFrame(
     animation(canvasState)
   })
 
-  if (canvasState.scene && canvasState.camera) {
-    canvasState?.renderer?.render(canvasState.scene, canvasState.camera)
-    canvasState?.renderer?.setAnimationLoop(() => {
+  if (canvasState && canvasState.renderer && canvasState.scene && canvasState.camera) {
+    canvasState.renderer.render(canvasState.scene, canvasState.camera)
+    canvasState.renderer.setAnimationLoop(() => {
       setAnimationFrame(canvasState, animations)
     })
   }
@@ -45,7 +45,7 @@ function getAspectRatio(canvas: HTMLCanvasElement) {
 }
 
 function handleCanvasSize(canvasState: CanvasState) {
-  const parent = canvasState?.canvas?.parentElement
+  const parent = canvasState && canvasState.canvas && canvasState.canvas.parentElement
 
   if (parent) {
     setCanvasToElementSize(canvasState, parent)
@@ -90,7 +90,7 @@ class SceneSetup {
   }
 
   setCamera() {
-    if (this.canvasState?.camera) {
+    if (this.canvasState && this.canvasState.camera) {
       this.canvasState.camera.lookAt(new THREE.Vector3())
 
       this.canvasState.camera.position.y = this.canvasState.presetConfiguration.camera.cameraVectorsState.position.y
@@ -102,7 +102,7 @@ class SceneSetup {
       renderer: configurationRenderer,
     } = this.canvasState.presetConfiguration
 
-    if (this.canvasState?.renderer) {
+    if (this.canvasState && this.canvasState.renderer) {
       this.canvasState.renderer.shadowMap.enabled =
         configurationRenderer.shadowMapEnabled
       this.canvasState.renderer.shadowMap.type =
@@ -121,7 +121,7 @@ class SceneSetup {
       if (renderer.xr) {
         renderer["xr"].enabled = configurationRenderer.XREnabled
 
-        renderer["xr"]?.setReferenceSpaceType?.("local")
+        renderer["xr"] && renderer["xr"].setReferenceSpaceType && renderer["xr"].setReferenceSpaceType("local")
       }
       this.canvasState.renderer.setClearColor(
         this.canvasState.presetConfiguration.ambient.color,
@@ -131,7 +131,7 @@ class SceneSetup {
   }
 
   setScene() {
-    if (this.canvasState?.scene) {
+    if (this.canvasState && this.canvasState.scene) {
       this.canvasState.scene.fog = new THREE.Fog(
         this.canvasState.presetConfiguration.ambient.color,
         this.canvasState.presetConfiguration.near,
@@ -142,7 +142,7 @@ class SceneSetup {
   }
 
   setCanvas() {
-    if (this.canvasState?.canvas) {
+    if (this.canvasState && this.canvasState.canvas) {
       this.canvasState.canvas.focus()
     }
   }

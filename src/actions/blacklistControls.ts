@@ -7,9 +7,11 @@ export default function blacklistControls(
 ) {
   const canvasState = getCanvasState(canvasSelector)
 
-  canvasState?.presetConfiguration.controlsBlacklist.splice(0)
-
-  canvasState?.presetConfiguration.controlsBlacklist.push(
-    ...controlsToBlacklist
-  )
+  if (canvasState) {
+    canvasState.presetConfiguration.controlsBlacklist.splice(0)
+  
+    canvasState.presetConfiguration.controlsBlacklist.push(
+      ...controlsToBlacklist
+    )
+  }
 }

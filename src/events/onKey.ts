@@ -22,8 +22,8 @@ export default function onKey(keyName: string) {
 
   handleKeyboardActions()
 
-  if (keysState?.keys) {
-    keysState.keys[key] = keysState?.keys?.[key] || new KeyLifeCycleObject()
+  if (keysState && keysState.keys) {
+    keysState.keys[key] = keysState.keys[key] || new KeyLifeCycleObject()
   }
 
   return new KeyLifeCycle(key)

@@ -25,5 +25,7 @@ export default function toggleFullscreen(component: HTMLElement) {
     return
   }
 
-  requestFullScreen?.call(component)
+  if (requestFullScreen) {
+    requestFullScreen.call(component)
+  }
 }
