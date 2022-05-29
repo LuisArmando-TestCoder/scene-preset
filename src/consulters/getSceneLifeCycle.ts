@@ -121,9 +121,9 @@ async function exportObject3D({
   exportedScene: ExportedScene
   key: string
 }) {
-  if (object3D instanceof THREE.Object3D) {
+  if (object3D && typeof (object3D as THREE.Object3D).position === "object") {
     exportedScene[key] = {
-      object3D: object3D,
+      object3D: object3D as THREE.Object3D,
     }
   }
 
