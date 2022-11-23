@@ -2,16 +2,16 @@ import type {
   AssemblyMeshesGroupOptions,
   Vector3D,
   TransformVectors,
-} from "../consulters/getAssembledMeshesGroup"
+} from "../consulters/getAssembledMeshesGroup.js"
 import type {
   SceneExport,
   SceneExportForScene,
   ExportedScene,
   Scene,
   Scenes,
-} from "../consulters/getSceneLifeCycle"
-import type { FreeObject, Group } from "../consulters/getProceduralGroup"
-import type { IsFullScreen } from "../consulters/getIsFullscreen"
+} from "../consulters/getSceneLifeCycle.js"
+import type { FreeObject, Group } from "../consulters/getProceduralGroup.js"
+import type { IsFullScreen } from "../consulters/getIsFullscreen.js"
 
 export type {
   IsFullScreen,

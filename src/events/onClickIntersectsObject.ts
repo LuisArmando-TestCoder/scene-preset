@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { getCanvasState } from "../consulters/index"
+import { getCanvasState } from "../consulters/index.js"
 import { CanvasState, IntersectionUtils } from "../types/state"
 
 const mouse = new THREE.Vector2()

@@ -1,17 +1,17 @@
-import type { BlacklistParameters } from "../actions/blacklistObjects"
-import type { WhitelistParameters } from "../actions/whitelistObjects"
-import type { CanvasSave } from "../actions/screenshotCanvas"
+import type { BlacklistParameters } from "../actions/blacklistObjects.js"
+import type { WhitelistParameters } from "../actions/whitelistObjects.js"
+import type { CanvasSave } from "../actions/screenshotCanvas.js"
 import type {
   MouseController,
   CameraEvent,
-} from "../actions/setFirstPersonDirection"
+} from "../actions/setFirstPersonDirection.js"
 import type {
   FlyKeys,
   Axes,
   Axis,
   Keyboard,
-} from "../actions/setFirstPersonPosition"
-import type { RequestFullScreen } from "../actions/toggleFullscreen"
+} from "../actions/setFirstPersonPosition.js"
+import type { RequestFullScreen } from "../actions/toggleFullscreen.js"
 
 export type {
   RequestFullScreen,

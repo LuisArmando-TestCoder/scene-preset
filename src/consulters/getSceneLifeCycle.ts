@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { CanvasState } from "../types/state"
+import { CanvasState } from "../types/state.js"
 
 export type SceneExport = {
   object3D: THREE.Object3D

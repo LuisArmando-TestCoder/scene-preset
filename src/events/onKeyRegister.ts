@@ -1,4 +1,4 @@
-import { keysState, animations } from "../state/index"
+import { keysState, animations } from "../state/index.js"
 
 const getKeysLength = () =>
   keysState.keys ? Object.keys(keysState.keys).length : 0

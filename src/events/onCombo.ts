@@ -1,5 +1,5 @@
-import { onKey } from "./index"
-import { keysState } from "../state/index"
+import { onKey } from "./index.js"
+import { keysState } from "../state/index.js"
 
 function getSortedLetters(letters: string[]): string {
   return (

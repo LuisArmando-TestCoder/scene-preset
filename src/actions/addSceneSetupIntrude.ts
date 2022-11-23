@@ -1,5 +1,5 @@
 import { CanvasStateCallback } from "../types/state"
-import { sceneSetupIntrudes } from "../state/index"
+import { sceneSetupIntrudes } from "../state/index.js"
 
 export default function addSceneSetupIntrude(
   callback: CanvasStateCallback,

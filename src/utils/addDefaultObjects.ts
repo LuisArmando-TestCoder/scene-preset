@@ -1,9 +1,9 @@
 import * as THREE from "three"
 
 import { CanvasState } from "../types/state"
-import { componentNames } from "../state/index"
+import { componentNames } from "../state/index.js"
 
-import * as components from "../components/index"
+import * as components from "../components/index.js"
 
 function getDefaultObjects(): THREE.Group {
   const defaultObjects = new THREE.Group()

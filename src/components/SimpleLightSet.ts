@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { componentNames } from "../state/index"
+import { componentNames } from "../state/index.js"
 
 function getHemisphereLight(): THREE.Light {
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444)

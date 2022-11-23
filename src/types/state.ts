@@ -1,5 +1,5 @@
-import type { AnimationsState } from "../state/animations"
-import type { AudiosState } from "../state/audios"
+import type { AnimationsState } from "../state/animations.js"
+import type { AudiosState } from "../state/audios.js"
 import type {
   KeyController,
   CameraVectorsState,
@@ -11,8 +11,8 @@ import type {
   CanvasState,
   CanvasesState,
 } from "../state/canvases"
-import type { ComponentNames } from "../state/componentNames"
-import type { CustomUniform } from "../state/customUniforms"
+import type { ComponentNames } from "../state/componentNames.js"
+import type { CustomUniform } from "../state/customUniforms.js"
 import type {
   KeyLifeCycleName,
   KeyLifeCycleObject,
@@ -20,7 +20,7 @@ import type {
   Events,
   KeysState,
 } from "../state/keys"
-import type { SceneSetupIntrudes } from "../state/sceneSetupIntrudes"
+import type { SceneSetupIntrudes } from "../state/sceneSetupIntrudes.js"
 
 export type {
   KeyController,

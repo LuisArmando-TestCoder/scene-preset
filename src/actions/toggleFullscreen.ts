@@ -1,4 +1,4 @@
-import getIsFullscreen from "../consulters/getIsFullscreen"
+import getIsFullscreen from "../consulters/getIsFullscreen.js"
 
 enum RequestFullScreenIndex {
   requestFullScreen = "requestFullScreen",

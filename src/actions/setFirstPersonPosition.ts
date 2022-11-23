@@ -1,8 +1,8 @@
-import { mouseController } from "./setFirstPersonDirection"
+import { mouseController } from "./setFirstPersonDirection.js"
 import { CanvasState } from "../types/state"
-import { onKey } from "../events/index"
-import { cameraVectorsState, keyController } from "../state/canvases"
-import animations from "../state/animations"
+import { onKey } from "../events/index.js"
+import { cameraVectorsState, keyController } from "../state/canvases.js"
+import animations from "../state/animations.js"
 
 export type Axes = "KeyWKeyS" | "KeyAKeyD"
 export type Axis = "x" | "z"

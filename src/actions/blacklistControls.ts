@@ -1,4 +1,4 @@
-import { getCanvasState } from "../consulters/index"
+import { getCanvasState } from "../consulters/index.js"
 import { ControlsBlacklist } from "../types/state"
 
 export default function blacklistControls(

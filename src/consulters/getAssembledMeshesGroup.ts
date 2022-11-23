@@ -1,7 +1,7 @@
 import * as THREE from "three"
 
-import defaultFragmentShader from "../shaders/fragment/default"
-import defaultVertexShader from "../shaders/vertex/default"
+import defaultFragmentShader from "../shaders/fragment/default.js"
+import defaultVertexShader from "../shaders/vertex/default.js"
 
 export interface Vector3D {
   x?: number

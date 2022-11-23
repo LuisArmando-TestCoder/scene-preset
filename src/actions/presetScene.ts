@@ -1,16 +1,16 @@
 import * as THREE from "three"
 
-import { addDefaultObjects } from "../utils/index"
-import { startControls } from "../actions/index"
-import { getCanvasState } from "../consulters/index"
+import { addDefaultObjects } from "../utils/index.js"
+import { startControls } from "../actions/index.js"
+import { getCanvasState } from "../consulters/index.js"
 import { PresetSceneCallbacks, CanvasStateCallback } from "../types/state"
 import {
   animations,
   canvasesState,
   animationsState,
   sceneSetupIntrudes,
-} from "../state/index"
-import { CanvasState } from "../state/canvases"
+} from "../state/index.js"
+import { CanvasState } from "../state/canvases.js"
 
 function intrudeSceneSetup(canvasState: CanvasState) {
   Object.keys(sceneSetupIntrudes).forEach(canvasSelector => {

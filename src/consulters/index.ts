@@ -1,10 +1,10 @@
-import getProceduralGroup from "./getProceduralGroup"
-import getAssembledMeshesGroup from "./getAssembledMeshesGroup"
-import getAudioProperties from "./getAudioProperties"
-import getSceneLifeCycle from "./getSceneLifeCycle"
-import getCanvasRecorder from "./getCanvasRecorder"
-import getIsFullscreen from "./getIsFullscreen"
-import getCanvasState from "./getCanvasState"
+import getProceduralGroup from "./getProceduralGroup.js"
+import getAssembledMeshesGroup from "./getAssembledMeshesGroup.js"
+import getAudioProperties from "./getAudioProperties.js"
+import getSceneLifeCycle from "./getSceneLifeCycle.js"
+import getCanvasRecorder from "./getCanvasRecorder.js"
+import getIsFullscreen from "./getIsFullscreen.js"
+import getCanvasState from "./getCanvasState.js"
 
 export {
   getProceduralGroup,

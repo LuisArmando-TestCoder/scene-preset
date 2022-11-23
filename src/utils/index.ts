@@ -1,8 +1,8 @@
-import addDefaultObjects from "./addDefaultObjects"
-import AudioProperties from "./AudioProperties"
-import KeyLifeCycle from "./KeyLifeCycle"
-import KeyHandler from "./KeyHandler"
-import Triggerer from "./Triggerer"
+import addDefaultObjects from "./addDefaultObjects.js"
+import AudioProperties from "./AudioProperties.js"
+import KeyLifeCycle from "./KeyLifeCycle.js"
+import KeyHandler from "./KeyHandler.js"
+import Triggerer from "./Triggerer.js"
 
 export {
   addDefaultObjects,

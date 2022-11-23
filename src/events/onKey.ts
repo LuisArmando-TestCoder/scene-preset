@@ -1,8 +1,8 @@
-import animations from "../state/animations"
+import animations from "../state/animations.js"
 
-import keysState from "../state/keys"
-import { KeyLifeCycleObject } from "../state/keys"
-import { KeyHandler, KeyLifeCycle, Triggerer } from "../utils/index"
+import keysState from "../state/keys.js"
+import { KeyLifeCycleObject } from "../state/keys.js"
+import { KeyHandler, KeyLifeCycle, Triggerer } from "../utils/index.js"
 
 function handleKeyboardActions() {
   if (!keysState.keys) {

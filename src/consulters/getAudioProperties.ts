@@ -1,6 +1,6 @@
-import animations from "../state/animations"
-import audiosState from "../state/audios"
-import { AudioProperties } from "../utils/index"
+import animations from "../state/animations.js"
+import audiosState from "../state/audios.js"
+import { AudioProperties } from "../utils/index.js"
 
 const { audios, audioPropertiesGroup } = audiosState
 

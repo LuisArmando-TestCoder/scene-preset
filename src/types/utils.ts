@@ -3,6 +3,6 @@ import type {
   KeyLifeCycle,
   KeyHandler,
   Triggerer,
-} from "../utils/index"
+} from "../utils/index.js"
 
 export type { AudioProperties, KeyLifeCycle, KeyHandler, Triggerer }

@@ -1,11 +1,11 @@
-import animations, { animationsState } from "./animations"
-import sceneSetupIntrudes from "./sceneSetupIntrudes"
-import canvasesState from "./canvases"
-import audiosState from "./audios"
-import keysState from "./keys"
-import materials from "./materials"
-import customUniforms from "./customUniforms"
-import componentNames from "./componentNames"
+import animations, { animationsState } from "./animations.js"
+import sceneSetupIntrudes from "./sceneSetupIntrudes.js"
+import canvasesState from "./canvases.js"
+import audiosState from "./audios.js"
+import keysState from "./keys.js"
+import materials from "./materials.js"
+import customUniforms from "./customUniforms.js"
+import componentNames from "./componentNames.js"
 
 export {
   animations,

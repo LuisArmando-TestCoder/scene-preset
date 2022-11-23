@@ -1,4 +1,4 @@
-import { AudioProperties } from "../types/utils"
+import { AudioProperties } from "../types/utils.js"
 
 export class AudiosState {
   audios: HTMLMediaElement[] = []

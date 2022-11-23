@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { componentNames } from "../state/index"
+import { componentNames } from "../state/index.js"
 
 export default class SimpleFloor {
   material = new THREE.MeshStandardMaterial({ color: 0xcccccc })

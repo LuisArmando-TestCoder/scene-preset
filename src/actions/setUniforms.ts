@@ -1,6 +1,6 @@
 import * as THREE from "three"
 
-import { materials, animations, customUniforms } from "../state/index"
+import { materials, animations, customUniforms } from "../state/index.js"
 import { CustomUniform } from "../types/state"
 
 // uniform vec3      iResolution;           // viewport resolution (in pixels)
