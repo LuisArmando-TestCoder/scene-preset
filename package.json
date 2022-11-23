@@ -5,6 +5,7 @@
   "scripts": {
     "tsc": "tsc"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LuisArmando-TestCoder/scene-preset.git"
@@ -30,6 +31,6 @@
   "devDependencies": {
     "@types/body-scroll-lock": "^3.1.0",
     "@types/three": "^0.135.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.9.3"
   }
 }
