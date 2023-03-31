@@ -70,7 +70,7 @@ export default (sceneNames: string[], id: string) => {
 }
 ```
 
-### And one of the scenes could look like:
+### And one of the scenes could look like
 
 ```ts
 import presetScene, { actions, types, consulters, events } from "scene-preset";
@@ -145,7 +145,7 @@ presetScene(
 );
 ```
 
-### Or another as:
+### Or another as
 
 ```ts
 import * as THREE from "three";
