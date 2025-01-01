@@ -186,6 +186,7 @@ export default function presetScene(
     )
     const scene = new THREE.Scene()
     const renderer = new THREE.WebGLRenderer({
+      alpha: true,
       canvas: canvas as HTMLCanvasElement,
       ...canvasState.presetConfiguration.renderer,
     })
