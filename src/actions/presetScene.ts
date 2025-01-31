@@ -193,7 +193,7 @@ export default function presetScene(
 
     canvasState.canvasSelector = canvasSelector
     canvasState.canvas = canvas as HTMLCanvasElement
-    canvasState.canvas.tabIndex = 0
+    // canvasState.canvas.tabIndex = 0
     canvasState.renderer = renderer
     canvasState.scene = scene
     canvasState.camera = camera
