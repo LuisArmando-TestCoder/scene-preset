@@ -51,7 +51,7 @@ const Canvas = ({
 
   return (
     <div className={`canvas3d ${className}`}>
-      <canvas id={id} />
+      <canvas id={id} tabIndex={0} />
     </div>
   );
 };
